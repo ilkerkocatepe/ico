@@ -1,0 +1,65 @@
+{
+    "menu": [
+        {
+            "name": "Dashboard",
+            "icon": "home",
+            "route": "user.dashboard"
+        },
+
+        {
+            "navheader": "Tokens",
+            "slug": ""
+        },
+        {
+            "name": "Purchase",
+            "icon": "hand-holding-usd",
+            "route": "user.purchase.index"
+        },
+        {
+            "name": "My Tokens",
+            "icon": "coins",
+            "route": "user.tokens"
+        },
+
+
+        {
+            "navheader": "Reference System",
+            "slug": ""
+        },
+        {
+            "name": "Invite People",
+            "icon": "street-view",
+            "route": "user.profile.invite"
+        },
+        {
+            "name": "Your Earnings",
+            "icon": "handshake",
+            "route": "user.profile.earnings"
+        },
+        {
+            "name": "Referral Tree",
+            "icon": "network-wired",
+            "route": "user.profile.tree"
+        },
+
+        {
+            "navheader": "Account",
+            "slug": ""
+        },
+        {
+            "name": "Profile",
+            "icon": "user-circle",
+            "route": "user.profile.index"
+        },
+        {
+            "name": "Your Wallets",
+            "icon": "wallet",
+            "route": "user.wallets"
+        },
+        {
+            "name": "External Wallets",
+            "icon": "external-link-square-alt",
+            "route": "user.external-wallets.index"
+        }
+    ]
+}

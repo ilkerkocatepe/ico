@@ -1,0 +1,115 @@
+{
+  "menu": [
+    {
+      "name": "Dashboard",
+      "icon": "home",
+      "route": "admin.dashboard"
+    },
+
+    {
+      "navheader": "ICO & STO",
+      "slug": ""
+    },
+        {
+          "name": "ICO Stages",
+          "icon": "th-large",
+          "route": "admin.stages.index"
+        },
+
+
+    {
+      "navheader": "Sells",
+      "slug": ""
+    },
+      {
+          "name": "Sells",
+          "icon": "hand-holding-usd",
+          "route": "admin.sells.index"
+      },
+
+    {
+      "navheader": "Payments",
+      "slug": ""
+    },
+      {
+          "name": "Crypto Pays",
+          "icon": "coins",
+          "route": "admin.crypto-pays.index"
+      },
+
+    {
+          "navheader": "Users",
+          "slug": ""
+      },
+      {
+          "name": "User List",
+          "icon": "users",
+          "route": "admin.users.index"
+      },
+      {
+          "name": "Broadcast E-mail",
+          "icon": "broadcast-tower",
+          "route": "admin.dashboard"
+      },
+      {
+          "name": "Subscribers",
+          "icon": "podcast",
+          "route": "admin.dashboard"
+      },
+
+    {
+          "navheader": "Miscellaneous",
+          "slug": ""
+      },
+      {
+          "name": "Documents",
+          "icon": "file-alt",
+          "route": "admin.dashboard"
+      },
+      {
+          "name": "Pages",
+          "icon": "pager",
+          "route": "admin.dashboard"
+      },
+      {
+          "name": "Blogs",
+          "icon": "blog",
+          "route": "admin.dashboard"
+      },
+
+    {
+          "navheader": "Settings",
+          "slug": ""
+      },
+      {
+          "name": "User Settings",
+          "icon": "users-cog",
+          "route": "admin.dashboard"
+      },
+      {
+          "name": "Referral Settings",
+          "icon": "retweet",
+          "route": "admin.dashboard"
+      },
+      {
+          "name": "Landing Page",
+          "icon": "scroll",
+          "route": "admin.dashboard"
+      },
+      {
+          "name": "SEO Settings",
+          "icon": "search",
+          "route": "admin.dashboard"
+      },
+      {
+          "name": "Mailing Settings",
+          "icon": "mail-bulk",
+          "route": "admin.dashboard"
+      },
+      {
+          "name": "System Settings",
+          "icon": "cogs",
+          "route": "admin.dashboard"
+      }
+  ]
+}
