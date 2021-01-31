@@ -121,18 +121,26 @@
                         </div>
                     </div>
                     <div class="card-body ps ps--active-y" style="height: 300px; overflow-y: visible;">
+                        @if(count(\App\Models\Announcement::where('status','1')->get()))
                         <ul class="timeline ml-50">
+                            @foreach(\App\Models\Announcement::where('status','1')->get() as $announcement)
                             <li class="timeline-item">
                                 <span class="timeline-point timeline-point-info timeline-point-indicator"></span>
                                 <div class="timeline-event">
                                     <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                                        <h6>Title</h6>
-                                        <span class="timeline-event-time mr-1">time</span>
+                                        <h6>{{ $announcement->title }}</h6>
+                                        <span class="timeline-event-time mr-1">{{ $announcement->updated_at }}</span>
                                     </div>
-                                    <p>details</p>
+                                    <p>{{ $announcement->description }}</p>
                                 </div>
                             </li>
+                            @endforeach
                         </ul>
+                        @else
+                            <div class="text-center">
+                                {{ __('We will announce the topics we want you to know here.') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
