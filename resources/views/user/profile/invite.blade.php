@@ -114,4 +114,14 @@
     @endif
 @endsection
 @section('page-scripts')
+    <script>
+        "use strict";
+        var userText = $("#copy-referral-link"),
+            btnCopy = $("#btn-copy");
+            btnCopy.on("click", function() {
+                userText.select(),
+                document.execCommand("copy"),
+                toastr.success("", "Copied to clipboard!")
+            });
+    </script>
 @endsection
