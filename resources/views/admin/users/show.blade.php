@@ -22,7 +22,7 @@
                                 <div class="user-avatar-section">
                                     <div class="d-flex justify-content-start">
                                         @if($user->profile_photo_path)
-                                            <img class="img-fluid rounded" src="{{ $user->profile_photo_path }}" height="104" width="104" alt="{{ $user->name }}" />
+                                            <img class="img-fluid rounded" src="storage/{{ $user->profile_photo_path }}" height="104" width="104" alt="{{ $user->name }}" />
                                         @else
                                             <img class="img-fluid rounded" src="https://ui-avatars.com/api/?name={{ $user->name }}&color=7F9CF5&background=EBF4FF" height="104" width="104" alt="{{ $user->name }}" />
                                         @endif
