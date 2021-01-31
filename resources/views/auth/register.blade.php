@@ -30,7 +30,7 @@
                 @csrf
                 {!! RecaptchaV3::field('register') !!}
 
-                @if(isset($reference) && \App\Models\Setting::value('reference_system'))
+                @if(isset($reference) && \App\Models\Setting::value('mlm_status'))
                     @php($reference_name = \App\Models\User::where('refer_hash',$reference)->first()->name ?? null)
                         @if(isset($reference_name))
                             <input type="hidden" id="reference" name="reference" value="{{ $reference }}">
