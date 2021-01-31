@@ -50,12 +50,10 @@ class FortifyServiceProvider extends ServiceProvider
             ])->validate();*/ // closed for local
 
             $user = User::where('email', $request->email)->first();
-            if (Auth::validate($request->only('email','password'))) {
+            if ($user &&
+                Hash::check($request->password, $user->password)) {
                 return $user;
             }
-            return back()->withErrors([
-                'email' => 'Please check your credentials',
-            ]);
         });
 
     }
