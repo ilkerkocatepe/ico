@@ -60,11 +60,8 @@ class SettingSeeder extends Seeder
         DB::table('settings')->insert(['setting' => 'token_symbol', 'group' => 'group','value' => 'FTX']);
         DB::table('settings')->insert(['setting' => 'decimal', 'group' => 'group','value' => '3']);
         //MLM Settings
-        /*DB::table('settings')->insert(['setting' => 'status', 'group' => 'group','value' => '1']);
-        DB::table('settings')->insert(['setting' => 'levels', 'group' => 'group','value' => '5']);
-        DB::table('settings')->insert(['setting' => 'parent_minimum', 'group' => 'group','value' => '1000']);
-        DB::table('settings')->insert(['setting' => 'child_minimum', 'group' => 'group','value' => '1000']);
-        DB::table('settings')->insert(['setting' => 'level_x_com', 'group' => 'group','value' => '10']); */
+        DB::table('settings')->insert(['setting' => 'mlm_status', 'group' => 'mlm','value' => '1']);
+        DB::table('settings')->insert(['setting' => 'mlm_levels', 'group' => 'mlm','value' => '5']);
         //System Settings
         DB::table('settings')->insert(['setting' => 'welcome_message', 'group' => 'group','value' => 'We are happy to see you among us.']);
         //Email Sending Settings

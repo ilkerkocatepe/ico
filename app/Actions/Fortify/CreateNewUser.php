@@ -33,7 +33,7 @@ class CreateNewUser implements CreatesNewUsers
 
         // If Reference System is available, get referral user:
         $referral_id = null;
-        if(Setting::value('reference_system'))
+        if(Setting::value('mlm_status'))
         {
             $referral_id = isset($input['reference']) ? User::where('refer_hash', $input['reference'])->first()->id : null;
         }
@@ -47,7 +47,10 @@ class CreateNewUser implements CreatesNewUsers
         ]);
 
         //Wallet Creation
-        (new \App\Http\Controllers\WalletController)->createWallets($control->id);
+        $user_id = $control->id;
+        dispatch(function ($user_id) {
+            (new \App\Http\Controllers\WalletController)->createWallets($user_id);
+        })->afterResponse();
 
         return $control;
     }
