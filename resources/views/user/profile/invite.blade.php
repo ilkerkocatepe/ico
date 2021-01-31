@@ -39,7 +39,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-xl-6 col-md-6 col-sm-6 col-12 pr-sm-0 mx-auto">
-                                {!! QrCode::size(200)->margin(100)->style('round',0.9)->errorCorrection('H')->generate(url('/register').'/'.$user->refer_hash); !!}
+                                {!! QrCode::size(200)->style('round',0.9)->errorCorrection('H')->generate(url('/register').'/'.$user->refer_hash); !!}
                             </div>
                         </div>
                     </div>
@@ -65,17 +65,17 @@
                                             @endif
                                         </td>
                                     </tr>
-                                    @if(\App\Models\Setting::value('mlm_status') && \App\Models\ReferenceLevel::all())
+                                    @if(\App\Models\Setting::value('mlm_status') && \App\Models\ReferenceLevel::all()->count())
                                         <tr>
                                             <td>{{__('Level Limit')}}</td>
                                             <td colspan="3" style="text-align: center;">{{ \App\Models\ReferenceLevel::all()->count() }}</td>
                                         </tr>
-                                        <tr>
+                                        <th>
                                             <td>{{ __('Level') }}</td>
                                             <td>{{ __('Minimum Balance') }}</td>
                                             <td>{{ __('Maximum Earning') }}</td>
                                             <td>{{ __('Rate') }}</td>
-                                        </tr>
+                                        </th>
                                         @foreach(\App\Models\ReferenceLevel::all() as $level)
                                             <tr>
                                                 <td>{{ __('Level') }} {{ $level->id }}</td>
