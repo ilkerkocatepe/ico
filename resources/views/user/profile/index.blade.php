@@ -83,8 +83,8 @@
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
-                                                <label for="telegram">{{__('profile.Telegram Username')}}</label>
-                                                <input type="text" class="form-control" id="telegram" name="telegram" placeholder="{{__('profile.Telegram Username')}}" value="{{$user->telegram}}" />
+                                                <label for="telegram">{{__('profile.Telegram User ID')}}</label>
+                                                <input type="text" class="form-control" id="telegram" name="telegram" placeholder="{{__('profile.Telegram User ID')}}" value="{{$user->telegram}}" />
                                                 <div class="invalid-feedback" id="error_telegram" style="display:block;">{{ $errors->first('telegram') }}</div>
                                             </div>
                                         </div>

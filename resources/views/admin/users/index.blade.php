@@ -22,7 +22,7 @@
                         </p>
                     </div>
                     <div class="table-responsive">
-                        <table id="usersTable" class="invoice-list-table table table-hover table-hover-animation" data-page-length='10'>
+                        <table id="usersTable" class="invoice-list-table table table-hover" data-page-length='10'>
                             <thead>
                             <tr>
                                 <th>#</th>

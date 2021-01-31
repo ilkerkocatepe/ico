@@ -25,7 +25,7 @@
                                 <h2 class="my-1 text-right font-large-4"><span class="text-primary">{{ auth()->user()->balance() }}</span> {{ $tokenSymbol }}</h2>
                                 <p class="card-text text-muted font-small-2 text-right">
                                     <span>{{ __('You got') }}</span>
-                                    <span class="font-weight-bolder">68</span> {{-- TODO:Bonus --}}
+                                    <span class="font-weight-bolder">{{ auth()->user()->bonus_earnings->sum('amount') }}</span>
                                     <span> {{ __('Bonus') }}</span>
                                 </p>
                             </div>
@@ -57,6 +57,9 @@
         <div class="row" id="table-hover-animation">
             <div class="col-12">
                 <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">{{ __('Purchase Requests') }}</h4>
+                    </div>
                     <div class="table-responsive">
                         <table id="purchasesTable" class="invoice-list-table table table-hover table-hover-animation" data-page-length='10'>
                             <thead>

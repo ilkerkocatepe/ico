@@ -63,7 +63,7 @@
                             <div class="d-flex justify-content-between mt-1">
                                 <label class="invoice-terms-title mb-1" for="bonus">{{__('Wallet Status')}}</label>
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="status" name="status" value="checked" @if(old('status')=='checked') checked @endif/>
+                                    <input type="checkbox" class="custom-control-input" id="status" name="status" value="checked" checked/>
                                     <label class="custom-control-label" for="status"></label>
                                 </div>
                             </div>

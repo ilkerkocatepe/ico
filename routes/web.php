@@ -31,7 +31,6 @@ Route::group(['middleware'=>['auth:sanctum', 'verified'],'prefix'=>'user','as'=>
     //  Purchase Block
     Route::view('purchase','user.purchase.index')->name('purchase.index');
     Route::view('tokens','user.purchase.tokens')->name('tokens');
-//    Route::view('purchase/log','user.purchase.log')->name('purchase.log');
     Route::post('purchase/stage',[\App\Http\Controllers\PurchaseController::class,'getStageInfo'])->name('purchase.stage');
     Route::post('purchase/bonus',[\App\Http\Controllers\PurchaseController::class,'getBonusInfo'])->name('purchase.bonus');
     Route::post('purchase/market',[\App\Http\Controllers\PurchaseController::class,'getMarketInfo'])->name('purchase.market');
@@ -74,8 +73,6 @@ Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant']
 
     Route::resource('sells',\App\Http\Controllers\SellController::class);
 
-    Route::resource('users',\App\Http\Controllers\UserController::class);
-
     Route::resource('crypto-gateways',\App\Http\Controllers\CryptoGatewayController::class);
 
     Route::post('crypto-pays/confirm',[\App\Http\Controllers\CryptoPayController::class, 'confirmPay'])->name('crypto-pays.confirm');
@@ -84,7 +81,13 @@ Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant']
 
     Route::resource('external-wallets',\App\Http\Controllers\ExternalWalletController::class);
 
+    //  USER BLOCK
+    Route::resource('users',\App\Http\Controllers\UserController::class);
 
+    //  MISCELLANEOUS
+    Route::resource('announcements',\App\Http\Controllers\AnnouncementController::class);
+
+    //  SETTINGS
     Route::get('/up', function () {Artisan::call('up');});
     Route::get('/down', function () {Artisan::call('down --secret="maintenance"'); return redirect()->route('check');});
 
