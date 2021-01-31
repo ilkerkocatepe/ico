@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->text('city')->nullable();
             $table->text('country')->nullable();
             $table->text('mobile')->nullable();
-            $table->text('telegram')->nullable();
+            $table->text('telegram')->nullable()->unique();
             $table->timestamps();
             $table->softDeletes();
         });

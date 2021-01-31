@@ -70,12 +70,12 @@
                                             <td>{{__('Level Limit')}}</td>
                                             <td colspan="3" style="text-align: center;">{{ \App\Models\ReferenceLevel::all()->count() }}</td>
                                         </tr>
-                                        <th>
+                                        <tr class="font-weight-bold">
                                             <td>{{ __('Level') }}</td>
                                             <td>{{ __('Minimum Balance') }}</td>
                                             <td>{{ __('Maximum Earning') }}</td>
                                             <td>{{ __('Rate') }}</td>
-                                        </th>
+                                        </tr>
                                         @foreach(\App\Models\ReferenceLevel::all() as $level)
                                             <tr>
                                                 <td>{{ __('Level') }} {{ $level->id }}</td>
