@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
@@ -88,8 +89,7 @@ class WalletController extends Controller
 
     public function createWallets($user_id)
     {
-        $setting = \App\Models\Setting::first();
-        $type = $setting->getSetting('token_symbol');
+        $type = Setting::value('token_symbol');
         $this->createFirstWallet($user_id, $type);
     }
 
