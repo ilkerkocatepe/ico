@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="media-body my-auto">
                                         <h4 class="font-weight-bolder mb-0">
-                                            {{ $user->wallet->balance }}
+                                            {{ $user->balance() }}
                                         </h4>
                                         <p class="card-text font-small-3 mb-0">{{ __('user-dash.Your Tokens') }}</p>
                                     </div>

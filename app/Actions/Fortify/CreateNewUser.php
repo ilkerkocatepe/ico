@@ -47,10 +47,7 @@ class CreateNewUser implements CreatesNewUsers
         ]);
 
         //Wallet Creation
-        $user_id = $control->id;
-        dispatch(function ($user_id) {
-            (new \App\Http\Controllers\WalletController)->createWallets($user_id);
-        })->afterResponse();
+        (new \App\Http\Controllers\WalletController)->createWallets($control->id);
 
         return $control;
     }
