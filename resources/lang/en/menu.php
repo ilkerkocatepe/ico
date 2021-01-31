@@ -18,6 +18,7 @@ return [
     "Subscribers" => "Subscribers",
 
     "Miscellaneous" => "Miscellaneous",
+    "Announcements" => "Announcements",
     "Documents" => "Documents",
     "Pages" => "Pages",
     "Blogs" => "Blogs",

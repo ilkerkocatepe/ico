@@ -62,6 +62,11 @@
           "slug": ""
       },
       {
+          "name": "Announcements",
+          "icon": "bullhorn",
+          "route": "admin.announcements.index"
+      },
+      {
           "name": "Documents",
           "icon": "file-alt",
           "route": "admin.dashboard"
