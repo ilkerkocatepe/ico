@@ -132,7 +132,7 @@ class User extends Authenticatable implements MustVerifyEmail, BannableContract
 
     public function balance()
     {
-        return $this->wallet()->balance;
+        return $this->wallet->balance;
     }
 
     public function status()
