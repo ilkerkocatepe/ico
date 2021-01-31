@@ -276,11 +276,7 @@ class PurchaseController extends Controller
             'amount' => ['required', 'integer'],
             'external_wallet' => ['required', 'integer'],
             'gateway' => ['required', 'string'],
-            'txhash' => ['required', 'string', Rule::unique('crypto_pays')
-                ->where(static function ($query) {
-                    return $query->where('status','confirmed');
-                }),
-                ],
+            'txhash' => ['required', 'string'],
             'user_note' => ['nullable', 'string'],
         ]);
         $amount = $this->amountCheck($validatedData['amount']);

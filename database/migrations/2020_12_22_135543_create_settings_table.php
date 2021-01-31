@@ -16,6 +16,7 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('setting');
+            $table->string('group');
             $table->text('value')->nullable();
             $table->timestamps();
             $table->softDeletes();

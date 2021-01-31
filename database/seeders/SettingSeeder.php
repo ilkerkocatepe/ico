@@ -16,79 +16,79 @@ class SettingSeeder extends Seeder
     public function run()
     {
         //Website Settings
-        DB::table('settings')->insert(['setting' => 'title','value' => 'FuturX ICO']);
-        DB::table('settings')->insert(['setting' => 'subtitle','value' => 'FuturX Initial Coin Offering']);
-        DB::table('settings')->insert(['setting' => 'support_email','value' => 'support@futurx.space']);
-        DB::table('settings')->insert(['setting' => 'base_url','value' => 'http://ico.test']);
-        DB::table('settings')->insert(['setting' => 'logo','value' => '/files/logos/logo.png']);
-        DB::table('settings')->insert(['setting' => 'favicon','value' => '/files/logos/favicon.png']);
-        DB::table('settings')->insert(['setting' => 'token_icon','value' => '/files/logos/token_icon.png']);
-        DB::table('settings')->insert(['setting' => 'GOOGLE_CAPTCHA_PUBLIC_KEY','value' => '6LcE-BoaAAAAAC6VsbTHr9MsOm0NgkcKvv3aFjun']);
-        DB::table('settings')->insert(['setting' => 'GOOGLE_CAPTCHA_PRIVATE_KEY','value' => '6LcE-BoaAAAAALlYPE7LznuHIlpX9ZvCXTvcjLtK']);
+        DB::table('settings')->insert(['setting' => 'title', 'group' => 'group','value' => 'FuturX ICO']);
+        DB::table('settings')->insert(['setting' => 'subtitle', 'group' => 'group','value' => 'FuturX Initial Coin Offering']);
+        DB::table('settings')->insert(['setting' => 'support_email', 'group' => 'group','value' => 'support@futurx.space']);
+        DB::table('settings')->insert(['setting' => 'base_url', 'group' => 'group','value' => 'http://ico.test']);
+        DB::table('settings')->insert(['setting' => 'logo', 'group' => 'group','value' => '/files/logos/logo.png']);
+        DB::table('settings')->insert(['setting' => 'favicon', 'group' => 'group','value' => '/files/logos/favicon.png']);
+        DB::table('settings')->insert(['setting' => 'token_icon', 'group' => 'group','value' => '/files/logos/token_icon.png']);
+        DB::table('settings')->insert(['setting' => 'GOOGLE_CAPTCHA_PUBLIC_KEY', 'group' => 'group','value' => '6LcE-BoaAAAAAC6VsbTHr9MsOm0NgkcKvv3aFjun']);
+        DB::table('settings')->insert(['setting' => 'GOOGLE_CAPTCHA_PRIVATE_KEY', 'group' => 'group','value' => '6LcE-BoaAAAAALlYPE7LznuHIlpX9ZvCXTvcjLtK']);
         //SEO Settings
-        DB::table('settings')->insert(['setting' => 'indexable','value' => '0']);
-        DB::table('settings')->insert(['setting' => 'description','value' => 'Initial Coin Offering Description']);
-        DB::table('settings')->insert(['setting' => 'keywords','value' => 'Initial,Coin,Offering']);
+        DB::table('settings')->insert(['setting' => 'indexable', 'group' => 'group','value' => '0']);
+        DB::table('settings')->insert(['setting' => 'description', 'group' => 'group','value' => 'Initial Coin Offering Description']);
+        DB::table('settings')->insert(['setting' => 'keywords', 'group' => 'group','value' => 'Initial,Coin,Offering']);
         //Contact Settings
-        DB::table('settings')->insert(['setting' => 'contact_email','value' => 'info@futurx.space']);
-        DB::table('settings')->insert(['setting' => 'contact_phone','value' => '+14582410011']);
+        DB::table('settings')->insert(['setting' => 'contact_email', 'group' => 'group','value' => 'info@futurx.space']);
+        DB::table('settings')->insert(['setting' => 'contact_phone', 'group' => 'group','value' => '+14582410011']);
         //Front Settings
-        DB::table('settings')->insert(['setting' => 'banner_title','value' => 'FUTURX']);
-        DB::table('settings')->insert(['setting' => 'banner_subtitle','value' => 'is your future.']);
-        DB::table('settings')->insert(['setting' => 'banner_details','value' => 'bla bla bla']);
-        DB::table('settings')->insert(['setting' => 'video','value' => 'https://www.youtube-nocookie.com/']);
+        DB::table('settings')->insert(['setting' => 'banner_title', 'group' => 'group','value' => 'FUTURX']);
+        DB::table('settings')->insert(['setting' => 'banner_subtitle', 'group' => 'group','value' => 'is your future.']);
+        DB::table('settings')->insert(['setting' => 'banner_details', 'group' => 'group','value' => 'bla bla bla']);
+        DB::table('settings')->insert(['setting' => 'video', 'group' => 'group','value' => 'https://www.youtube-nocookie.com/']);
 
-        DB::table('settings')->insert(['setting' => 'about','value' => '1']);
-        DB::table('settings')->insert(['setting' => 'about_title','value' => 'About us']);
-        DB::table('settings')->insert(['setting' => 'about_subtitle','value' => 'what about']);
-        DB::table('settings')->insert(['setting' => 'about_content','value' => 'Lorem ipsum']);
+        DB::table('settings')->insert(['setting' => 'about', 'group' => 'group','value' => '1']);
+        DB::table('settings')->insert(['setting' => 'about_title', 'group' => 'group','value' => 'About us']);
+        DB::table('settings')->insert(['setting' => 'about_subtitle', 'group' => 'group','value' => 'what about']);
+        DB::table('settings')->insert(['setting' => 'about_content', 'group' => 'group','value' => 'Lorem ipsum']);
 
-        DB::table('settings')->insert(['setting' => 'partners','value' => '1']);
-        DB::table('settings')->insert(['setting' => 'partners_title','value' => 'Our Partners']);
-        DB::table('settings')->insert(['setting' => 'partners_subtitle','value' => 'Lorem ipsum']);
+        DB::table('settings')->insert(['setting' => 'partners', 'group' => 'group','value' => '1']);
+        DB::table('settings')->insert(['setting' => 'partners_title', 'group' => 'group','value' => 'Our Partners']);
+        DB::table('settings')->insert(['setting' => 'partners_subtitle', 'group' => 'group','value' => 'Lorem ipsum']);
 
-        DB::table('settings')->insert(['setting' => 'press','value' => '1']);
-        DB::table('settings')->insert(['setting' => 'press_title','value' => 'On Press']);
-        DB::table('settings')->insert(['setting' => 'press_subtitle','value' => 'Lorem ipsum']);
+        DB::table('settings')->insert(['setting' => 'press', 'group' => 'group','value' => '1']);
+        DB::table('settings')->insert(['setting' => 'press_title', 'group' => 'group','value' => 'On Press']);
+        DB::table('settings')->insert(['setting' => 'press_subtitle', 'group' => 'group','value' => 'Lorem ipsum']);
 
-        DB::table('settings')->insert(['setting' => 'roadmap','value' => '1']);
-        DB::table('settings')->insert(['setting' => 'contact_form','value' => '1']);
-        DB::table('settings')->insert(['setting' => 'subscribe','value' => '1']);
+        DB::table('settings')->insert(['setting' => 'roadmap', 'group' => 'group','value' => '1']);
+        DB::table('settings')->insert(['setting' => 'contact_form', 'group' => 'group','value' => '1']);
+        DB::table('settings')->insert(['setting' => 'subscribe', 'group' => 'group','value' => '1']);
         //ICO Settings
-        DB::table('settings')->insert(['setting' => 'status','value' => '1']);
-        DB::table('settings')->insert(['setting' => 'token_name','value' => 'FUTURX']);
-        DB::table('settings')->insert(['setting' => 'token_symbol','value' => 'FTX']);
-        DB::table('settings')->insert(['setting' => 'decimal','value' => '3']);
+        DB::table('settings')->insert(['setting' => 'status', 'group' => 'group','value' => '1']);
+        DB::table('settings')->insert(['setting' => 'token_name', 'group' => 'group','value' => 'FUTURX']);
+        DB::table('settings')->insert(['setting' => 'token_symbol', 'group' => 'group','value' => 'FTX']);
+        DB::table('settings')->insert(['setting' => 'decimal', 'group' => 'group','value' => '3']);
         //MLM Settings
-        /*DB::table('settings')->insert(['setting' => 'status','value' => '1']);
-        DB::table('settings')->insert(['setting' => 'levels','value' => '5']);
-        DB::table('settings')->insert(['setting' => 'parent_minimum','value' => '1000']);
-        DB::table('settings')->insert(['setting' => 'child_minimum','value' => '1000']);
-        DB::table('settings')->insert(['setting' => 'level_x_com','value' => '10']); */
+        /*DB::table('settings')->insert(['setting' => 'status', 'group' => 'group','value' => '1']);
+        DB::table('settings')->insert(['setting' => 'levels', 'group' => 'group','value' => '5']);
+        DB::table('settings')->insert(['setting' => 'parent_minimum', 'group' => 'group','value' => '1000']);
+        DB::table('settings')->insert(['setting' => 'child_minimum', 'group' => 'group','value' => '1000']);
+        DB::table('settings')->insert(['setting' => 'level_x_com', 'group' => 'group','value' => '10']); */
         //System Settings
-        DB::table('settings')->insert(['setting' => 'welcome_message','value' => 'We are happy to see you among us.']);
+        DB::table('settings')->insert(['setting' => 'welcome_message', 'group' => 'group','value' => 'We are happy to see you among us.']);
         //Email Sending Settings
-        DB::table('settings')->insert(['setting' => 'mail_service','value' => 'smtp']);
-        DB::table('settings')->insert(['setting' => 'mail_from_name','value' => 'FuturX']);
-        DB::table('settings')->insert(['setting' => 'mail_from_address','value' => 'mail@ilkerkocatepe.com.tr']);
+        DB::table('settings')->insert(['setting' => 'mail_service', 'group' => 'group','value' => 'smtp']);
+        DB::table('settings')->insert(['setting' => 'mail_from_name', 'group' => 'group','value' => 'FuturX']);
+        DB::table('settings')->insert(['setting' => 'mail_from_address', 'group' => 'group','value' => 'mail@ilkerkocatepe.com.tr']);
             //SMTP
-            DB::table('settings')->insert(['setting' => 'smtp_host','value' => 'ilkerkocatepe.com.tr']);
-            DB::table('settings')->insert(['setting' => 'smtp_port','value' => '465']);
-            DB::table('settings')->insert(['setting' => 'smtp_encryption','value' => 'ssl']);
-            DB::table('settings')->insert(['setting' => 'smtp_username','value' => 'mail@ilkerkocatepe.com.tr']);
-            DB::table('settings')->insert(['setting' => 'smtp_password','value' => 'Yalovax*2020']);
+            DB::table('settings')->insert(['setting' => 'smtp_host', 'group' => 'group','value' => 'ilkerkocatepe.com.tr']);
+            DB::table('settings')->insert(['setting' => 'smtp_port', 'group' => 'group','value' => '465']);
+            DB::table('settings')->insert(['setting' => 'smtp_encryption', 'group' => 'group','value' => 'ssl']);
+            DB::table('settings')->insert(['setting' => 'smtp_username', 'group' => 'group','value' => 'mail@ilkerkocatepe.com.tr']);
+            DB::table('settings')->insert(['setting' => 'smtp_password', 'group' => 'group','value' => 'Yalovax*2020']);
             //Mailgun
-            DB::table('settings')->insert(['setting' => 'mailgun_domain','value' => '']);
-            DB::table('settings')->insert(['setting' => 'mailgun_secret','value' => '']);
-            DB::table('settings')->insert(['setting' => 'mailgun_endpoint','value' => 'api.eu.mailgun.net']);
+            DB::table('settings')->insert(['setting' => 'mailgun_domain', 'group' => 'group','value' => '']);
+            DB::table('settings')->insert(['setting' => 'mailgun_secret', 'group' => 'group','value' => '']);
+            DB::table('settings')->insert(['setting' => 'mailgun_endpoint', 'group' => 'group','value' => 'api.eu.mailgun.net']);
             //Postmark
-            DB::table('settings')->insert(['setting' => 'postmark_token','value' => '']);
+            DB::table('settings')->insert(['setting' => 'postmark_token', 'group' => 'group','value' => '']);
             //SES
-            DB::table('settings')->insert(['setting' => 'ses_key','value' => '']);
-            DB::table('settings')->insert(['setting' => 'ses_secret','value' => '']);
-            DB::table('settings')->insert(['setting' => 'ses_region','value' => 'us-east-1']);
+            DB::table('settings')->insert(['setting' => 'ses_key', 'group' => 'group','value' => '']);
+            DB::table('settings')->insert(['setting' => 'ses_secret', 'group' => 'group','value' => '']);
+            DB::table('settings')->insert(['setting' => 'ses_region', 'group' => 'group','value' => 'us-east-1']);
         //Profile Settings
-        DB::table('settings')->insert(['setting' => 'address_information','value' => '1']);
-        DB::table('settings')->insert(['setting' => 'mobile_information', 'value' => '1']);
+        DB::table('settings')->insert(['setting' => 'address_information', 'group' => 'group','value' => '1']);
+        DB::table('settings')->insert(['setting' => 'mobile_information', 'group' => 'group', 'value' => '1']);
     }
 }
