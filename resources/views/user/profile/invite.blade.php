@@ -11,7 +11,7 @@
     @php($user = \Illuminate\Support\Facades\Auth::user())
     <section id="invite-people">
         <div class="row">
-            <img src="{{ asset('storage/assets/images/backend/referral.png') }}" style="width: 100%; height: auto;" alt="Referral Program" />
+            <img src="{{ asset('storage/assets/images/backend/referral.png') }}" class="mx-auto" style="width: 100%; height: auto; max-height:500px; max-width:1000px;" alt="Referral Program" />
         </div>
         <div class="row">
             <div class="col-sm-6">
