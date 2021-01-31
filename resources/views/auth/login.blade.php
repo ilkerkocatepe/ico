@@ -20,7 +20,7 @@
                 @csrf
                 {!! RecaptchaV3::field('login') !!}
                 @if ($errors->any())
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger p-1">
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
