@@ -300,8 +300,10 @@ class PurchaseController extends Controller
                'status' => 'pending',
             ]);
 
-            Notification::send(User::find(1), new PaymentReceived);
-            Notification::send(\auth()->user(), new \App\Notifications\User\PaymentReceived);
+            dispatch(function () {
+                Notification::send(User::find(1), new PaymentReceived);
+                Notification::send(\auth()->user(), new \App\Notifications\User\PaymentReceived);
+            })->afterResponse();
             return redirect()->route('user.tokens')->with(['success'=>__('Your payment process has been successfully completed!')]);
         } catch(\Exception $e)
         {
