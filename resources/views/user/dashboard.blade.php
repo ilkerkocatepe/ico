@@ -129,7 +129,7 @@
                                 <div class="timeline-event">
                                     <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
                                         <h6>{{ $announcement->title }}</h6>
-                                        <span class="timeline-event-time mr-1">{{ $announcement->updated_at }}</span>
+                                        <span class="timeline-event-time mr-1">{{ $announcement->updated_at->diffForHumans() }}</span>
                                     </div>
                                     <p>{{ $announcement->description }}</p>
                                 </div>
