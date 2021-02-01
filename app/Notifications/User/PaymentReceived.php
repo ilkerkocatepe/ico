@@ -14,13 +14,19 @@ class PaymentReceived extends Notification implements ShouldQueue
     use Queueable;
 
     /**
+     * @var \App\Events\PaymentReceived
+     */
+    private $event;
+
+    /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param \App\Events\PaymentReceived $event
      */
-    public function __construct()
+    public function __construct(\App\Events\PaymentReceived $event)
     {
         //
+        $this->event = $event;
     }
 
     /**

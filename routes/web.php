@@ -34,7 +34,7 @@ Route::group(['middleware'=>['auth:sanctum', 'verified'],'prefix'=>'user','as'=>
     Route::post('purchase/stage',[\App\Http\Controllers\PurchaseController::class,'getStageInfo'])->name('purchase.stage');
     Route::post('purchase/bonus',[\App\Http\Controllers\PurchaseController::class,'getBonusInfo'])->name('purchase.bonus');
     Route::post('purchase/market',[\App\Http\Controllers\PurchaseController::class,'getMarketInfo'])->name('purchase.market');
-    Route::any('purchase/prepare',[\App\Http\Controllers\PurchaseController::class,'prepare'])->name('purchase.prepare');
+    Route::any('purchase/preview',[\App\Http\Controllers\PurchaseController::class,'prepare'])->name('purchase.prepare');
     Route::put('purchase/confirm',[\App\Http\Controllers\PurchaseController::class,'confirm'])->name('purchase.confirm');
     Route::put('purchase/cancel',[\App\Http\Controllers\PurchaseController::class,'cancel'])->name('purchase.cancel');
 
