@@ -70,6 +70,16 @@ class PaymentReceived extends Notification implements ShouldQueue
     {
         if(isset($notifiable->telegram))
         {
+            $subject = 'telegram';
+            $description = 'Telegram Sent';
+            activity($subject)
+                ->causedBy(\auth()->user())
+                ->withProperties([
+                    'status'=>'success',
+                    'interface'=>'web'
+                ])
+                ->log($description);
+
             return TelegramMessage::create()
                 // Optional recipient user id.
                 ->to($notifiable->telegram)

@@ -92,8 +92,4 @@ Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant']
     Route::get('/up', function () {Artisan::call('up');});
     Route::get('/down', function () {Artisan::call('down --secret="maintenance"'); return redirect()->route('check');});
 
-    Route::get('telegramtest', function() {
-        return auth()->user()->notify(new \App\Notifications\User\PaymentReceived('test'));
-    });
-
 });
