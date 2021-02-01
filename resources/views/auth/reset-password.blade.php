@@ -16,7 +16,7 @@
             </a>
 
             <h2 class="brand-text text-primary text-center">{{ \App\Models\Setting::where('setting', 'title')->first()->value }}</h2>
-            <p class="card-text mb-2">Your new password must be different from previously used passwords</p>
+            <p class="card-text mb-2">{{ __('Please set a strong enough and memorable password to keep your funds safe.') }}</p>
             @if ($errors->any())
                 <div class="alert alert-danger mt-2">
                     <ul>
