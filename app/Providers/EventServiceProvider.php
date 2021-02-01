@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\PaymentReceived;
+use App\Listeners\PaymentReceivedNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -38,6 +40,10 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\PasswordReset' => [
             'App\Listeners\LogPasswordReset',
         ],
+
+        PaymentReceived::class => [
+            PaymentReceivedNotification::class,
+        ],
     ];
 
     /**
@@ -48,5 +54,10 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+    }
+
+    public function shouldDiscoverEvents()
+    {
+        return true;
     }
 }

@@ -284,7 +284,7 @@ class PurchaseController extends Controller
         $gateway = $validatedData['gateway'];
 
         try {
-            CryptoPay::create([
+            $payment = CryptoPay::create([
                'user_id' => Auth::id(),
                'stage_id' => Stage::activeStage()->id,
                'payment_id' => '1',
@@ -300,10 +300,9 @@ class PurchaseController extends Controller
                'status' => 'pending',
             ]);
 
-            dispatch(function () {
-                Notification::send(User::find(1), new PaymentReceived);
-                Notification::send(\auth()->user(), new \App\Notifications\User\PaymentReceived);
-            })->afterResponse();
+            //  CREATE EVENT
+            event(new \App\Events\PaymentReceived($payment));
+
             return redirect()->route('user.tokens')->with(['success'=>__('Your payment process has been successfully completed!')]);
         } catch(\Exception $e)
         {

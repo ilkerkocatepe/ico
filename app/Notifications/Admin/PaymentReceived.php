@@ -66,11 +66,9 @@ class PaymentReceived extends Notification implements ShouldQueue
 
         return TelegramMessage::create()
             // Optional recipient user id.
-            ->to('ilkerk_77')
+            ->to('1079787804')
             // Markdown supported.
             ->content("Payment Received!\nThere is a pending payment. Please take proper action.")
-
-
             // (Optional) Inline Buttons
             ->button('Check it',  url('/'));
     }
