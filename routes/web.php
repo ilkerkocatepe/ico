@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use NotificationChannels\Telegram\TelegramMessage;
 use Spatie\Permission\Models\Role;
 
 Route::model('external_wallet','App\Models\ExternalWallet');
@@ -91,5 +92,12 @@ Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant']
     Route::get('/up', function () {Artisan::call('up');});
     Route::get('/down', function () {Artisan::call('down --secret="maintenance"'); return redirect()->route('check');});
 
+    Route::get('telegramtest', function() {
+        return TelegramMessage::create()
+            // Optional recipient user id.
+            ->to(User::find(1)->telegram)
+            // Markdown supported.
+            ->content("Payment Request Received!\nYour payment request has been received. You will be notified if it is approved or rejected.");
+    });
 
 });

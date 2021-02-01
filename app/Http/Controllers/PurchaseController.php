@@ -301,7 +301,7 @@ class PurchaseController extends Controller
             ]);
 
             //  CREATE EVENT
-            event(new \App\Events\PaymentReceived($payment));
+            \App\Events\PaymentReceived::dispatch($payment);
 
             return redirect()->route('user.tokens')->with(['success'=>__('Your payment process has been successfully completed!')]);
         } catch(\Exception $e)
