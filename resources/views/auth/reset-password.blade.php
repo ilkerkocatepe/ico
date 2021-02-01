@@ -10,6 +10,7 @@
 
 @section('content')
     <div class="card mb-0">
+        <div class="card-body p-2">
             <a href="javascript:void(0);" class="brand-logo">
                 <img src="{{ asset('assets/images/logo/logo.png') }}" style="height: 100px; width: 100px;">
             </a>
