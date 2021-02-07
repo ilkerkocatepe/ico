@@ -11,14 +11,15 @@ class PaymentRejected extends Notification
 {
     use Queueable;
 
+    public $admin_note;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($admin_note)
     {
-        //
+        $this->admin_note = $admin_note;
     }
 
     /**
@@ -41,9 +42,9 @@ class PaymentRejected extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Payment Request Rejected')
+                    ->line('Your purchase request has been rejected.')
+                    ->line($this->admin_note ? 'Description: ' . $this->admin_note : '');
     }
 
     /**

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="loading" lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-textdirection="ltr">
     @include('layouts.user.header')
-    <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static   menu-collapsed" data-open="click" data-menu="vertical-menu-modern" data-col="">
+    <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static menu-collapsed @if(auth()->user()->theme == 'dark') dark-layout @endif" data-open="click" data-menu="vertical-menu-modern" data-col="">
         @include('layouts.user.navbar')
         @include('layouts.user.mainmenu')
 

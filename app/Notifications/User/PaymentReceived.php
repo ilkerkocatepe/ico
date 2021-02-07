@@ -37,7 +37,7 @@ class PaymentReceived extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return $notifiable->telegram ? ['mail',TelegramChannel::class] : ['mail'];
+        return $notifiable->telegram ? ['mail','database',TelegramChannel::class] : ['mail','database'];
     }
 
     /**
@@ -62,7 +62,8 @@ class PaymentReceived extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //
+            'type' => 'payment',
+            'message' => 'Your payment request received',
         ];
     }
 
@@ -70,21 +71,11 @@ class PaymentReceived extends Notification implements ShouldQueue
     {
         if(isset($notifiable->telegram))
         {
-            $subject = 'telegram';
-            $description = 'Telegram Sent';
-            activity($subject)
-                ->causedBy(\auth()->user())
-                ->withProperties([
-                    'status'=>'success',
-                    'interface'=>'web'
-                ])
-                ->log($description);
-
             return TelegramMessage::create()
                 // Optional recipient user id.
                 ->to($notifiable->telegram)
                 // Markdown supported.
-                ->content("Payment Request Received!\nYour payment request has been received. You will be notified if it is approved or rejected.");
+                ->content("*Payment Request Received!*\nYour payment request has been received. You will be notified if it is approved or rejected.");
         }
     }
 }

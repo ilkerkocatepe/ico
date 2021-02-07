@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CryptoPay;
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -88,13 +89,22 @@ class SellController extends Controller
         //
     }
 
-    public function addBalance($user_id,$amount)
+    public function addBalance($user_id, $amount)
     {
-        return true;
+        $wallet = User::find($user_id)->wallet;
+        $balance = $wallet->balance;
+        $wallet->update([
+            'balance' => $balance + $amount
+        ]);
     }
 
-    public function subBalance($user_id,$amount)
+    public function subBalance($user_id, $amount)
     {
-        return true;
+        $wallet = User::find($user_id)->wallet;
+        $balance = $wallet->balance;
+        $wallet->update([
+            'balance' => $balance - $amount
+        ]);
+
     }
 }

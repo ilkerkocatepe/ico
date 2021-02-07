@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CryptoPayUpdateRequest;
 use App\Models\CryptoGateway;
 use App\Models\CryptoPay;
+use App\Models\User;
+use App\Notifications\User\PaymentConfirmed;
+use App\Notifications\User\PaymentRejected;
 use hisorange\BrowserDetect\Exceptions\Exception;
 use Illuminate\Http\Request;
 
@@ -127,10 +130,16 @@ class CryptoPayController extends Controller
                 $payment->update([
                     'admin_note' => $request->rejectNote,
                 ]);
+            } else {
+                $request->rejectNote = null;
             }
             $payment->update([
                 'status' => 'rejected'
             ]);
+
+            //  SEND NOTIFICATION TO USER
+            User::find($payment->user_id)->notify(new PaymentRejected($request->rejectNote));
+
             $msg = $msg ? '. ' . $msg : null;
             return back()->with('success', __('Payment successfully rejected') . $msg);
         } else {
@@ -143,7 +152,7 @@ class CryptoPayController extends Controller
         if(CryptoPay::find($request->confirmId))
         {
             $payment = CryptoPay::find($request->confirmId);
-            if($payment->status == 'rejected')
+            if($payment->status != 'confirmed')
             {
                 // add amount to balance
                 try {
@@ -160,10 +169,16 @@ class CryptoPayController extends Controller
                 $payment->update([
                     'admin_note' => $request->confirmNote,
                 ]);
+            } else {
+                $request->confirmNote = null;
             }
             $payment->update([
                 'status' => 'confirmed'
             ]);
+
+            //  SEND NOTIFICATION TO USER
+            User::find($payment->user_id)->notify(new PaymentConfirmed($request->confirmNote));
+
             $msg = $msg ? '. ' . $msg : null;
             return back()->with('success', __('Payment successfully confirmed') . $msg);
         } else {

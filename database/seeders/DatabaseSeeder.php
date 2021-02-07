@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\CryptoPay;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,10 +27,13 @@ class DatabaseSeeder extends Seeder
             CryptoGatewaySeeder::class,
             ExternalWalletSeeder::class,
         ]);
-        CryptoPay::factory(50)->create();
-        User::factory(30)->create();
+        //CryptoPay::factory(50)->create();
+        //User::factory(30)->create();
         $this->call([
             WalletSeeder::class,
         ]);
+        Role::create(['name' => 'Admin']);
+        Role::create(['name' => 'Accountant']);
+        Role::create(['name' => 'Editor']);
     }
 }

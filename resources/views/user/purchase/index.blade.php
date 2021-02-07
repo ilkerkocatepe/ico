@@ -431,11 +431,6 @@
         $('#bonus_info').hide();
         $('.external_wallets').hide();
         $('.external_alert').hide();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
         $('#stage-next').click(function (e)
         {

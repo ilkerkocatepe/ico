@@ -47,6 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail, BannableContract
         'city',
         'country',
         'mobile',
+        'layout',
     ];
 
     /**

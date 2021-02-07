@@ -31,7 +31,7 @@ class PaymentReceived extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail',TelegramChannel::class];
+        return $notifiable->telegram ? ['mail',TelegramChannel::class] : ['mail'];
     }
 
     /**
@@ -63,13 +63,15 @@ class PaymentReceived extends Notification implements ShouldQueue
 
     public function toTelegram($notifiable)
     {
-
-        return TelegramMessage::create()
-            // Optional recipient user id.
-            ->to('1079787804')
-            // Markdown supported.
-            ->content("Payment Received!\nThere is a pending payment. Please take proper action.")
-            // (Optional) Inline Buttons
-            ->button('Check it',  url('/'));
+        if(isset($notifiable->telegram))
+        {
+                TelegramMessage::create()
+                    // Optional recipient user id.
+                    ->to($notifiable->telegram)
+                    // Markdown supported.
+                    ->content("Payment Received!\nThere is a pending payment. Please take proper action.")
+                    // (Optional) Inline Buttons
+                    ->button('Check it', url('/'));
+        }
     }
 }

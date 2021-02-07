@@ -16,7 +16,7 @@ class CreateReferenceLevelsTable extends Migration
         Schema::create('reference_levels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('level');
+            $table->integer('level')->unique();
             $table->integer('min_balance')->default(0);
             $table->integer('max_earnings')->nullable();
             $table->integer('rate');

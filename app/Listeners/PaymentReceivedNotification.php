@@ -37,15 +37,14 @@ class PaymentReceivedNotification implements ShouldQueue
      */
     public function handle(PaymentReceived $event)
     {
-//        Notification::send(User::find(1), new \App\Notifications\Admin\PaymentReceived);
-        //Notification::send(\auth()->user(), new \App\Notifications\User\PaymentReceived);
 
-        dispatch(function ($event) {
+        dispatch(function () use($event) {
             auth()->user()->notify(new \App\Notifications\User\PaymentReceived($event));
+            Notification::send(User::role(['Admin','Accountant'])->get(), new \App\Notifications\Admin\PaymentReceived);
         })->afterResponse();
 
         $event->subject = 'payment';
-        $event->description = 'Payment Received';
+        $event->description = 'Payment Request Received';
         activity($event->subject)
             ->causedBy(\auth()->user())
             ->withProperties([

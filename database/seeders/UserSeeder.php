@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'password' => '$2y$10$ngPeW0nJPVgUcX7wBTH8EOfytI0Vw1s3zIwaypVvJmyNXpNgxM61q', // password
             'remember_token' => Str::random(10),
             'refer_hash' => strtoupper(Str::random(10)),
-            'telegram' => 'ilkerk_77',
+            'telegram' => 1079787804,
             'created_at' => now(),
         ]);
 

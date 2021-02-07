@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 use NotificationChannels\Telegram\TelegramMessage;
 use Spatie\Permission\Models\Role;
@@ -54,6 +55,11 @@ Route::group(['middleware'=>['auth:sanctum', 'verified'],'prefix'=>'user','as'=>
         Route::post('logout-other-devices',[\App\Http\Controllers\UserController::class,'killSessions'])->name('logoutSessions');
         Route::post('enable2fa',[\App\Http\Controllers\UserController::class,'enable2FA'])->name('enable2FA');
         Route::post('disable2fa',[\App\Http\Controllers\UserController::class,'disable2FA'])->name('disable2FA');
+        Route::get('read-notifications',[\App\Http\Controllers\UserController::class,'readAllNotifications'])->name('read.notifications');
+
+        //  LAYOUT
+        Route::post('switchLight',[\App\Http\Controllers\UserController::class,'switchLight'])->name('switchLight');
+        Route::post('switchDark',[\App\Http\Controllers\UserController::class,'switchDark'])->name('switchDark');
 
         //  Reference System Block
         Route::view('invite-people','user.profile.invite')->name('invite');
@@ -92,4 +98,8 @@ Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant']
     Route::get('/up', function () {Artisan::call('up');});
     Route::get('/down', function () {Artisan::call('down --secret="maintenance"'); return redirect()->route('check');});
 
+    Route::get('telegram', function () {
+        $test = Notification::send(User::role(['Admin','Accountant'])->get(), new \App\Notifications\Admin\PaymentReceived);
+        dd($test);
+    });
 });

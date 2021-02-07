@@ -43,14 +43,14 @@
                                     <i class="fa fa-user fa-2x mr-1 mt-1 text-primary"></i> <a class="badge badge-pill badge-glow badge-primary font-medium-3 mb-2 p-1" href="{{ route('admin.users.edit',$cryptoPay->user_id) }}">{{ \App\Models\User::find($cryptoPay->user_id)->name }}</a>
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <i class="fas fa-wallet fa-2x mr-1 mt-1 text-primary"></i> <a class="badge badge-pill badge-glow badge-light-primary font-medium-3 mb-2 p-1" href="{{ route('admin.external-wallets.edit',$cryptoPay->outer_wallet_id) }}">{{ \App\Models\ExternalWallet::find($cryptoPay->outer_wallet_id)->name }}</a>
+                                    <i class="fas fa-wallet fa-2x mr-1 mt-1 text-primary"></i> <a class="badge badge-pill badge-glow badge-light-primary font-medium-3 mb-2 p-1" href="{{ route('admin.external-wallets.edit',$cryptoPay->external_wallet_id) }}">{{ \App\Models\ExternalWallet::find($cryptoPay->external_wallet_id)->name }}</a>
                                 </div>
                                 <div class="col-md-12 col-12">
                                     <div class="input-group mb-1">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">{{ __('User Wallet') }}</span>
                                         </div>
-                                        <input type="text" id="user_wallet" class="form-control" name="user_wallet" value="{{\App\Models\ExternalWallet::find($cryptoPay->outer_wallet_id)->address}}" readonly/>
+                                        <input type="text" id="user_wallet" class="form-control" name="user_wallet" value="{{\App\Models\ExternalWallet::find($cryptoPay->external_wallet_id)->address}}" readonly/>
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-primary" type="button" id="copy_user_wallet">{{__('Copy')}}</button>
                                         </div>
@@ -208,7 +208,7 @@
                                             {{ __('Sender') }}
                                         </td>
                                         <td>
-                                            @if($transaction['sender']!=\App\Models\ExternalWallet::find($cryptoPay->outer_wallet_id)->address)
+                                            @if($transaction['sender']!=\App\Models\ExternalWallet::find($cryptoPay->external_wallet_id)->address)
                                                 <i class="fas fa-times-circle fa-2x text-danger"></i>
                                             @else
                                                 <i class="fas fa-check-circle fa-2x text-success"></i>

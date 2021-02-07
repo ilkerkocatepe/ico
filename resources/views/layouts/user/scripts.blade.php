@@ -21,6 +21,12 @@
 
 
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     flatpickr('.flatpickr', {
         enableTime: true,
         dateFormat: "Y-m-d H:i",
@@ -28,6 +34,36 @@
         locale: {
             firstDayOfWeek: 1
         },
+    });
+
+    $('#switchLight').on('click',function (event){
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{{route('user.profile.switchLight')}}',
+            data: {layout: 'light'},
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
+
+    $('#switchDark').on('click',function (event) {
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{{route('user.profile.switchDark')}}',
+            data: {layout: 'dark'},
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
     });
 </script>
 

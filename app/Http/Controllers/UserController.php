@@ -196,4 +196,24 @@ class UserController extends Controller
             return response()->json(['message' => 'Two factor authentication could not be disabled']);
         }
     }
+
+    public function readAllNotifications()
+    {
+        \auth()->user()->unreadNotifications->markAsRead();
+        return back();
+    }
+
+    public function switchLight()
+    {
+        $user = Auth::user();
+        $user->theme = 'light';
+        $user->save();
+    }
+
+    public function switchDark()
+    {
+        $user = Auth::user();
+        $user->theme = 'dark';
+        $user->save();
+    }
 }

@@ -16,14 +16,12 @@ class WalletSeeder extends Seeder
     public function run()
     {
         //adding wallet for admin
-        for ($i=1; $i<32; $i++)
-        {
+
             DB::table('wallets')->insert([
-                'user_id' => $i,
+                'user_id' => 1,
                 'type' => 'FTX',
-                'address' => 'FTX00000'.$i,
+                'address' => 'FTX000001',
                 'balance' => 0,
             ]);
-        }
     }
 }
