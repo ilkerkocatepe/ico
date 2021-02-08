@@ -31,7 +31,7 @@ class PaymentConfirmed extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -57,7 +57,8 @@ class PaymentConfirmed extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'type' => 'payment',
+            'message' => 'Your payment request has been confirmed!',
         ];
     }
 }

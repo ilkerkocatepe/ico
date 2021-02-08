@@ -42,7 +42,7 @@
                                             <i data-feather="dollar-sign" class="text-primary"></i>
                                         </div>
                                         <div class="ml-1">
-                                            <h5 class="mb-0">0</h5>
+                                            <h5 class="mb-0">{{ $user->balance() }}</h5>
                                             <small>{{__('Balance')}}</small>
                                         </div>
                                     </div>

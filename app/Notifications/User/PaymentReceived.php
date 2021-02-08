@@ -37,7 +37,7 @@ class PaymentReceived extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return $notifiable->telegram ? ['mail','database',TelegramChannel::class] : ['mail','database'];
+        return ['mail','database'];
     }
 
     /**
