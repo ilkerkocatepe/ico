@@ -46,15 +46,15 @@
                                             <small>{{__('Balance')}}</small>
                                         </div>
                                     </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="color-box bg-light-success">
-                                            <i data-feather="trending-up" class="text-success"></i>
-                                        </div>
-                                        <div class="ml-1">
-                                            <h5 class="mb-0">0</h5>
-                                            <small>{{__('Referenced Users')}}</small>
-                                        </div>
-                                    </div>
+{{--                                    <div class="d-flex align-items-center">--}}
+{{--                                        <div class="color-box bg-light-success">--}}
+{{--                                            <i data-feather="trending-up" class="text-success"></i>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="ml-1">--}}
+{{--                                            <h5 class="mb-0">0</h5>--}}
+{{--                                            <small>{{__('Referenced Users')}}</small>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-12 mt-2 mt-xl-0">
@@ -156,7 +156,6 @@
                     <div class="card-body">
                         <div class="row mb-1">
                             <a href="" class="btn btn-icon btn-info waves-effect waves-float waves-light ml-1" title="{{__('Send E-mail')}}"><i class="far fa-envelope"></i></a>
-                            <a href="" class="btn btn-icon btn-info waves-effect waves-float waves-light ml-1" title="{{__('Send Telegram Message')}}"><i class="far fa-paper-plane"></i></a>
                         </div>
                         @if(!in_array('Super Admin',$user->getRoleNames()->all()))
                             <a class="btn btn-primary text-center btn-block" href="{{route('admin.users.edit',$user)}}"><i class="fas fa-user-edit"></i> {{ __('Edit') }}</a>
@@ -196,7 +195,7 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs nav-justified" id="user-show-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="wallets-tab-justified" data-toggle="tab" href="#wallets" role="tab" aria-controls="wallets" aria-selected="true">{{__('Wallets')}}</a>
+                                <a class="nav-link active" id="wallets-tab-justified" data-toggle="tab" href="#wallets" role="tab" aria-controls="wallets" aria-selected="true">{{__('User Wallets')}}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="external-wallets-tab-justified" data-toggle="tab" href="#external-wallets" role="tab" aria-controls="external-wallets" aria-selected="true">{{__('External Wallets')}}</a>
@@ -260,16 +259,11 @@
                                 </table>
                             </div>
                             <div class="tab-pane" id="referrals" role="tabpanel" aria-labelledby="referrals-tab-justified">
-                                <p>
-                                    Croissant jelly tootsie roll candy canes. Donut sugar plum jujubes sweet roll chocolate cake wafer. Tart
-                                    caramels jujubes. Dragée tart oat cake. Fruitcake cheesecake danish. Danish topping candy jujubes. Candy
-                                    canes candy canes lemon drops caramels tiramisu chocolate bar pie.
-                                </p>
-                                <p>
-                                    Gummi bears tootsie roll cake wafer. Gummies powder apple pie bear claw. Caramels bear claw fruitcake
-                                    topping lemon drops. Carrot cake macaroon ice cream liquorice donut soufflé. Gummi bears carrot cake
-                                    toffee bonbon gingerbread lemon drops chocolate cake.
-                                </p>
+                                @if(count($user->children))
+                                    @include('user.profile.tree.user',['user' => $user])
+                                @else
+                                    <h3 class="mx-auto my-5 text-center">{{__('There is no one registered with the user\'s reference link!')}}</h3>
+                                @endif
                             </div>
                         </div>
                     </div>
