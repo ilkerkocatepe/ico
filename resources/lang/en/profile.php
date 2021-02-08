@@ -15,7 +15,7 @@ return [
 
     'Allowed JPG, JPEG or PNG. Max size of 1MB' => 'Allowed JPG, JPEG or PNG. Max size of 1MB',
     'Name' => 'Name',
-    'Telegram User ID' => 'Telegram User ID',
+    'Telegram Username' => 'Telegram Username',
     'Mobile' => 'Mobile',
     'Country' => 'Country',
     'Address' => 'Address',
