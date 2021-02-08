@@ -102,7 +102,7 @@
                             </div>
                             <div class="text-center">
                                 <p class="card-text mb-50">{{ __('user-dash.Sold Tokens')}}</p>
-                                <span class="font-large-1 font-weight-bold">{{ \App\Models\Stage::activeStage()->sells->sum('amount') }}</span>
+                                <span class="font-large-1 font-weight-bold">{{ \App\Models\Stage::activeStage()->sells()->where('status','confirmed')->sum('amount') }}</span>
                             </div>
                             <div class="text-center">
                                 <p class="card-text mb-50">{{ __('user-dash.Total Distribution')}}</p>
