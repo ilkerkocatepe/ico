@@ -37,7 +37,7 @@ class Stage extends Model
 
     public function sells()
     {
-        return $this->hasMany(CryptoPay::class);
+        return $this->hasMany(Sell::class);
     }
 
     public static function activePrice()
@@ -60,10 +60,36 @@ class Stage extends Model
         $id = Stage::where('status','running')->latest()->first()->id;
     }
 
-    public function remain()
+    public function totalSold()
     {
         $sold = $this->sells()->where('status','confirmed')->sum('amount');
-        return ($this->amount - $sold);
+        $bonus = $this->bonus_earnings()->sum('bonus_amount');
+        $referral = $this->referral_earnings()->sum('amount');
+        return ($sold + $bonus + $referral);
     }
 
+    public function remain()
+    {
+        return ($this->amount - $this->totalSold());
+    }
+
+    public function bonusStatus()
+    {
+        return $this->bonus_status;
+    }
+
+    public function bonusRate()
+    {
+        return $this->bonus_rate;
+    }
+
+    public function bonus_earnings()
+    {
+        return $this->hasMany(BonusEarnings::class);
+    }
+
+    public function referral_earnings()
+    {
+        return $this->hasMany(ReferralEarnings::class);
+    }
 }

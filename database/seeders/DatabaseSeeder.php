@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             PaymentMethodSeeder::class,
             CryptoGatewaySeeder::class,
             ExternalWalletSeeder::class,
+            ReferenceLevelSeeder::class,
         ]);
         //CryptoPay::factory(50)->create();
         //User::factory(30)->create();

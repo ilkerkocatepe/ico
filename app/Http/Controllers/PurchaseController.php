@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CryptoGateway;
 use App\Models\CryptoPay;
 use App\Models\ExternalWallet;
+use App\Models\Sell;
 use App\Models\Stage;
 use App\Models\User;
 use App\Notifications\Admin\PaymentReceived;
@@ -133,13 +134,18 @@ class PurchaseController extends Controller
         if($gateway->id == 1)
         {
             // BTC
-            $value = $this->getBTCValue();
-            return response()->json(['symbol'=>$gateway->symbol,'value'=>$value,'decimal'=>$gateway->confirm_decimal]);
+            $value = $this->selectedMarketValue(1);
+            return response()->json(['symbol'=>$gateway->symbol,'value'=>$value,'decimal'=>$gateway->confirm_decimal,'type'=>$gateway->type]);
         } elseif($gateway->id == 2)
         {
             // ETH
-            $value = $this->getETHValue();
-            return response()->json(['symbol'=>$gateway->symbol,'value'=>$value,'decimal'=>$gateway->confirm_decimal]);
+            $value = $this->selectedMarketValue(2);
+            return response()->json(['symbol'=>$gateway->symbol,'value'=>$value,'decimal'=>$gateway->confirm_decimal,'type'=>$gateway->type]);
+        } elseif($gateway->id == 3)
+        {
+            // USDT ERC20
+            $value = $this->selectedMarketValue(3);
+            return response()->json(['symbol'=>$gateway->symbol,'value'=>$value,'decimal'=>$gateway->confirm_decimal,'type'=>$gateway->type]);
         } else {
             return response()->json(['message'=>'There is an error!']);
         }
@@ -151,6 +157,7 @@ class PurchaseController extends Controller
         switch ($id){
             case 1: return $this->getBTCValue();
             case 2: return $this->getETHValue();
+            case 3: return 1;
         }
     }
 
@@ -205,22 +212,28 @@ class PurchaseController extends Controller
             if($validatedData['form_gateway'] == 1)
             {
                 // BTC
-                $value = $this->getBTCValue();
-                $type = 'BTC';
+                $value = $this->selectedMarketValue(1);
+                $symbol = CryptoGateway::find(1)->symbol;
                 $decimal = CryptoGateway::find(1)->confirm_decimal;
             } elseif($validatedData['form_gateway'] == 2)
             {
                 // ETH
-                $value = $this->getETHValue();
-                $type = 'ETH';
+                $value = $this->selectedMarketValue(2);
+                $symbol = CryptoGateway::find(2)->symbol;
                 $decimal = CryptoGateway::find(2)->confirm_decimal;
+            } elseif($validatedData['form_gateway'] == 3)
+            {
+                // USDT ERC20
+                $value = $this->selectedMarketValue(3);
+                $symbol = CryptoGateway::find(3)->symbol;
+                $decimal = CryptoGateway::find(3)->confirm_decimal;
             } else {
-                return back()->with(['error'=>'ERROR']);
+                return back()->with(['error'=>'There is an error. Contact with support!']);
             }
             $gateway=$validatedData['form_gateway'];
             $wallet = $this->walletAddress($validatedData['form_gateway']);
             $payable = number_format(($amount * $price / $value), $decimal);
-            return view('user.purchase.preview',compact('amount','price','total','bonus','value','payable','external_wallet','wallet','type','gateway'));
+            return view('user.purchase.preview',compact('amount','price','total','bonus','value','payable','external_wallet','wallet','symbol','gateway'));
         } catch (\Exception $e)
         {
             return back()->with(['error'=>__('An error occurred. Refresh the page and try again.')]);
@@ -230,7 +243,7 @@ class PurchaseController extends Controller
     public function walletAddress($gateway)
     {
         $address = CryptoGateway::findOrFail($gateway)->val1;
-        if(Hash::make($address) == CryptoGateway::findOrFail($gateway)->val4)
+        if(Hash::check($address, CryptoGateway::findOrFail($gateway)->val4))
         {
             return $address;
         } else {
@@ -285,19 +298,24 @@ class PurchaseController extends Controller
 
         try {
             $payment = CryptoPay::create([
-               'user_id' => Auth::id(),
-               'stage_id' => Stage::activeStage()->id,
-               'payment_id' => '1',
                'gateway_id' => $gateway,
                'external_wallet_id' => $external_wallet,
-               'amount' => $amount,
-               'price' => Stage::activePrice(),
-               'total' => Stage::activePrice() * $amount,
                'payable' => number_format(Stage::activePrice() * $amount/$this->selectedMarketValue($gateway), CryptoGateway::find($gateway)->confirm_decimal),
                'current_value' => $this->selectedMarketValue($gateway) ?? 0,
                'txhash' => $validatedData['txhash'],
-               'user_note' => $validatedData['user_note'],
-               'status' => 'pending',
+            ]);
+
+            Sell::create([
+                'user_id' => Auth::id(),
+                'stage_id' => Stage::activeStage()->id,
+                'method_id' => '1',
+                'sellable_id' => $payment->getKey(),
+                'sellable_type' => $payment->getMorphClass(),
+                'amount' => $amount,
+                'price' => Stage::activePrice(),
+                'total' => Stage::activePrice() * $amount,
+                'user_note' => $validatedData['user_note'],
+                'status' => 'pending',
             ]);
 
             //  CREATE EVENT
@@ -313,16 +331,16 @@ class PurchaseController extends Controller
     public function cancel()
     {
         $id = \request()->id;
-        if(Auth::id() != CryptoPay::findOrFail($id)->user_id)
+        if(Auth::id() != Sell::findOrFail($id)->user_id)
         {
-            return response()->json(['message' => __('Purchase could not find!')]);
+            return response()->json(['message' => __('Purchase request could not find!')]);
         }
         if (! Hash::check(\request()->password, Auth::user()->password)) {
             return response()->json(['message' => __('The given password does not match!')]);
         }
 
         try {
-            $purchase = CryptoPay::findOrFail($id);
+            $purchase = Sell::findOrFail($id);
             $purchase->status = 'canceled';
             $purchase->save();
             return response()->json(['success' => __('The purchase canceled successfully!')]);

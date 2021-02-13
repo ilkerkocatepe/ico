@@ -3,7 +3,7 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('user.dashboard') }}">
                     <span class="brand-logo">
-                        <img src="{{ asset('assets/images/logo/logo.png') }}">
+                        <img src="{{ asset('storage/assets/front/images/logosq.svg') }}" style="height: 36px; width: 36px;">
                     </span>
                     <h2 class="brand-text">{{ env('APP_NAME') }}</h2>
                 </a></li>

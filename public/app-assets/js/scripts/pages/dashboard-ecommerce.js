@@ -57,6 +57,7 @@ $(window).on('load', function () {
   var goalOverviewChart;
 
 
+
   //------------ Statistics Bar Chart ------------
   //----------------------------------------------
   statisticsOrderChartOptions = {

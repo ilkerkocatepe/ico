@@ -25,6 +25,11 @@ class PaymentMethod extends Model
 
     public function cryptoGateways()
     {
-        return $this->hasMany(CryptoGateway::class,'payment_id');
+        return $this->hasMany(CryptoGateway::class,'payment_id')->where('status','1');
+    }
+
+    public function sells()
+    {
+        return $this->hasMany(Sell::class);
     }
 }

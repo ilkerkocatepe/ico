@@ -92,7 +92,7 @@
                                 <div class="col-12">
                                     <h4 class="text-center">
                                         {{ __('Please firstly, send') }}&nbsp;
-                                        <span class="text-primary">{{ $payable }}&nbsp;{{ $type }}</span>&nbsp;
+                                        <span class="text-primary">{{ $payable }}&nbsp;{{ $symbol }}</span>&nbsp;
                                         {{ __('to') }}&nbsp;
                                         <span class="text-primary">{{ $wallet }}</span>&nbsp;
                                         {{ __('from') }}&nbsp;

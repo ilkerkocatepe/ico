@@ -15,90 +15,91 @@ $(window).on('load', function () {
   var $white = '#fff';
   var $strokeColor = '#ebe9f1';
 
-  //var $gainedChart = document.querySelector('#gained-chart');
+  var $gainedChart = document.querySelector('#gained-chart');
   var $orderChart = document.querySelector('#order-chart');
   var $avgSessionsChart = document.querySelector('#avg-sessions-chart');
-  //var $supportTrackerChart = document.querySelector('#support-trackers-chart');
+  var $supportTrackerChart = document.querySelector('#support-trackers-chart');
   var $salesVisitChart = document.querySelector('#sales-visit-chart');
 
-  // var gainedChartOptions;
+  var gainedChartOptions;
   var orderChartOptions;
   var avgSessionsChartOptions;
-  //var supportTrackerChartOptions;
+  var supportTrackerChartOptions;
   var salesVisitChartOptions;
 
-  // var gainedChart;
+  var gainedChart;
   var orderChart;
   var avgSessionsChart;
-  //var supportTrackerChart;
+  var supportTrackerChart;
   var salesVisitChart;
+
 
   // Subscribed Gained Chart
   // ----------------------------------
 
-  // gainedChartOptions = {
-  //   chart: {
-  //     height: 100,
-  //     type: 'area',
-  //     toolbar: {
-  //       show: false
-  //     },
-  //     sparkline: {
-  //       enabled: true
-  //     },
-  //     grid: {
-  //       show: false,
-  //       padding: {
-  //         left: 0,
-  //         right: 0
-  //       }
-  //     }
-  //   },
-  //   colors: [window.colors.solid.primary],
-  //   dataLabels: {
-  //     enabled: false
-  //   },
-  //   stroke: {
-  //     curve: 'smooth',
-  //     width: 2.5
-  //   },
-  //   fill: {
-  //     type: 'gradient',
-  //     gradient: {
-  //       shadeIntensity: 0.9,
-  //       opacityFrom: 0.7,
-  //       opacityTo: 0.5,
-  //       stops: [0, 80, 100]
-  //     }
-  //   },
-  //   series: [
-  //     {
-  //       name: 'Subscribers',
-  //       data: [28, 40, 36, 52, 38, 60, 55]
-  //     }
-  //   ],
-  //   xaxis: {
-  //     labels: {
-  //       show: false
-  //     },
-  //     axisBorder: {
-  //       show: false
-  //     }
-  //   },
-  //   yaxis: [
-  //     {
-  //       y: 0,
-  //       offsetX: 0,
-  //       offsetY: 0,
-  //       padding: { left: 0, right: 0 }
-  //     }
-  //   ],
-  //   tooltip: {
-  //     x: { show: false }
-  //   }
-  // };
-  // gainedChart = new ApexCharts($gainedChart, gainedChartOptions);
-  // gainedChart.render();
+  gainedChartOptions = {
+    chart: {
+      height: 100,
+      type: 'area',
+      toolbar: {
+        show: false
+      },
+      sparkline: {
+        enabled: true
+      },
+      grid: {
+        show: false,
+        padding: {
+          left: 0,
+          right: 0
+        }
+      }
+    },
+    colors: [window.colors.solid.primary],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2.5
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0.9,
+        opacityFrom: 0.7,
+        opacityTo: 0.5,
+        stops: [0, 80, 100]
+      }
+    },
+    series: [
+      {
+        name: 'Subscribers',
+        data: [28, 40, 36, 52, 38, 60, 55]
+      }
+    ],
+    xaxis: {
+      labels: {
+        show: false
+      },
+      axisBorder: {
+        show: false
+      }
+    },
+    yaxis: [
+      {
+        y: 0,
+        offsetX: 0,
+        offsetY: 0,
+        padding: { left: 0, right: 0 }
+      }
+    ],
+    tooltip: {
+      x: { show: false }
+    }
+  };
+  gainedChart = new ApexCharts($gainedChart, gainedChartOptions);
+  gainedChart.render();
 
   // Order Received Chart
   // ----------------------------------
@@ -138,10 +139,12 @@ $(window).on('load', function () {
         stops: [0, 80, 100]
       }
     },
-    series: [{
-        name: 'Sales',
-        data: [1, 25, 51, 11]
-    }],
+    series: [
+      {
+        name: 'Orders',
+        data: [10, 15, 8, 15, 7, 12, 8]
+      }
+    ],
     xaxis: {
       labels: {
         show: false
@@ -219,60 +222,60 @@ $(window).on('load', function () {
 
   // Support Tracker Chart
   // -----------------------------
-  // supportTrackerChartOptions = {
-  //   chart: {
-  //     height: 270,
-  //     type: 'radialBar'
-  //   },
-  //   plotOptions: {
-  //     radialBar: {
-  //       size: 150,
-  //       offsetY: 20,
-  //       startAngle: -150,
-  //       endAngle: 150,
-  //       hollow: {
-  //         size: '65%'
-  //       },
-  //       track: {
-  //         background: $white,
-  //         strokeWidth: '100%'
-  //       },
-  //       dataLabels: {
-  //         name: {
-  //           offsetY: -5,
-  //           color: $textHeadingColor,
-  //           fontSize: '1rem'
-  //         },
-  //         value: {
-  //           offsetY: 15,
-  //           color: $textHeadingColor,
-  //           fontSize: '1.714rem'
-  //         }
-  //       }
-  //     }
-  //   },
-  //   colors: [window.colors.solid.danger],
-  //   fill: {
-  //     type: 'gradient',
-  //     gradient: {
-  //       shade: 'dark',
-  //       type: 'horizontal',
-  //       shadeIntensity: 0.5,
-  //       gradientToColors: [window.colors.solid.primary],
-  //       inverseColors: true,
-  //       opacityFrom: 1,
-  //       opacityTo: 1,
-  //       stops: [0, 100]
-  //     }
-  //   },
-  //   stroke: {
-  //     dashArray: 8
-  //   },
-  //   series: [83],
-  //   labels: ['Completed Tickets']
-  // };
-  // supportTrackerChart = new ApexCharts($supportTrackerChart, supportTrackerChartOptions);
-  // supportTrackerChart.render();
+  supportTrackerChartOptions = {
+    chart: {
+      height: 270,
+      type: 'radialBar'
+    },
+    plotOptions: {
+      radialBar: {
+        size: 150,
+        offsetY: 20,
+        startAngle: -150,
+        endAngle: 150,
+        hollow: {
+          size: '65%'
+        },
+        track: {
+          background: $white,
+          strokeWidth: '100%'
+        },
+        dataLabels: {
+          name: {
+            offsetY: -5,
+            color: $textHeadingColor,
+            fontSize: '1rem'
+          },
+          value: {
+            offsetY: 15,
+            color: $textHeadingColor,
+            fontSize: '1.714rem'
+          }
+        }
+      }
+    },
+    colors: [window.colors.solid.danger],
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'dark',
+        type: 'horizontal',
+        shadeIntensity: 0.5,
+        gradientToColors: [window.colors.solid.primary],
+        inverseColors: true,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100]
+      }
+    },
+    stroke: {
+      dashArray: 8
+    },
+    series: [83],
+    labels: ['Completed Tickets']
+  };
+  supportTrackerChart = new ApexCharts($supportTrackerChart, supportTrackerChartOptions);
+  supportTrackerChart.render();
 
   // Sales Chart
   // -----------------------------

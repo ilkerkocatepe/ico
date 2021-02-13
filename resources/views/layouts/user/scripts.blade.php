@@ -43,10 +43,8 @@
             url: '{{route('user.profile.switchLight')}}',
             data: {layout: 'light'},
             success: function (response) {
-                console.log(response);
             },
             error: function (response) {
-                console.log(response);
             }
         });
     });
@@ -58,10 +56,8 @@
             url: '{{route('user.profile.switchDark')}}',
             data: {layout: 'dark'},
             success: function (response) {
-                console.log(response);
             },
             error: function (response) {
-                console.log(response);
             }
         });
     });

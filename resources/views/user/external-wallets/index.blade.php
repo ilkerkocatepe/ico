@@ -38,7 +38,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($user->getExternalWallets as $wallet)
+                            @foreach($user->externalWallets as $wallet)
                                 <tr>
                                     <td>{{ $wallet->name }}</td>
                                     <td>{{ $wallet->description }}</td>
@@ -110,7 +110,15 @@
                     '<"col-sm-12 col-md-6"i>' +
                     '<"col-sm-12 col-md-6"p>' +
                     '>',
-                buttons: [],
+                buttons: [
+                    {
+                        text: '{{__('Purchase')}}',
+                        className: 'btn btn-primary btn-add-record ml-2',
+                        action: function (e, dt, button, config) {
+                            window.location = '{{ route('user.purchase.index') }}';
+                        }
+                    }
+                ],
             });
         } );
 

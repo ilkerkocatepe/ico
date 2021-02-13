@@ -56,7 +56,7 @@
                         <div class="row border-top text-center mx-0">
                             <div class="col-6 border-right py-1">
                                 <p class="card-text text-muted mb-0">Sold</p>
-                                <h3 class="font-weight-bolder mb-0">{{ $stage->sells()->where('status','confirmed')->sum('amount') }}</h3>
+                                <h3 class="font-weight-bolder mb-0">{{ $stage->totalSold() }}</h3>
                             </div>
                             <div class="col-6 py-1">
                                 <p class="card-text text-muted mb-0">Total</p>

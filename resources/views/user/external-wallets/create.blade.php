@@ -41,7 +41,8 @@
                                         <select class="form-control" name="type" id="type">
                                             <option @if(old('type')=='BTC') selected @endif value="BTC">BTC</option>
                                             <option @if(old('type')=='ETH') selected @endif value="ETH">ETH</option>
-                                            <option @if(old('type')=='OmniUSDT') selected @endif value="OmniUSDT">Omni USDT</option>
+                                            <option @if(old('type')=='USDT_Omni') selected @endif value="USDT_Omni">USDT (Omni)</option>
+                                            <option @if(old('type')=='USDT_ERC20') selected @endif value="USDT_ERC20">USDT (ERC20)</option>
                                             <option @if(old('type')=='LTC') selected @endif value="LTC">LTC</option>
                                             <option @if(old('type')=='XRP') selected @endif value="XRP">XRP</option>
                                         </select>

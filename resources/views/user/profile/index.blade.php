@@ -47,14 +47,18 @@
             </div>
             <div class="col-md-9">
                 <div class="card">
-                    <div class="col-12 mt-75">
-                        <div class="alert alert-warning mb-50" role="alert">
-                            <h4 class="alert-heading">{{__('profile.Notice')}}</h4>
-                            <div class="alert-body">
-                                <span>{{__('profile.You do not have any external wallet. Please enter an external wallet to purchase and get your tokens.')}}</span>
+                    @if(count($user->externalWallets))
+                    @else
+                        <div class="col-12 mt-75">
+                            <div class="alert alert-warning mb-50" role="alert">
+                                <h4 class="alert-heading">{{__('profile.Notice')}}</h4>
+                                <div class="alert-body">
+                                    <span>{{__('profile.You do not have any external wallet. Please enter an external wallet to purchase and get your tokens.')}}</span>
+                                    <a href="{{ route('user.external-wallets.create') }}"><span>{{ __('Create External Wallet') }}</span></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="card-body">
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="account-general" aria-labelledby="account-pill-general" aria-expanded="true">

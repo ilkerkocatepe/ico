@@ -14,15 +14,9 @@
         <div class="row match-height">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="card card-congratulations">
-                    <div class="card-body text-center">
-                        <img src="{{asset('app-assets/images/elements/decore-left.png')}}" class="congratulations-img-left" />
-                        <img src="{{asset('app-assets/images/elements/decore-right.png')}}" class="congratulations-img-right" />
-                        <div class="avatar avatar-xl bg-primary shadow">
-                            <div class="avatar-content">
-                                <i data-feather="star" class="font-large-1"></i>
-                            </div>
-                        </div>
-                        <div class="text-center">
+                    <img class="card-img-top" src="{{ asset('storage/assets/images/backend/welcome.png') }}"/>
+                    <div class="card-img-overlay">
+                        <div class="text-center" style="position: absolute; width: 95%; bottom: 3rem;">
                             <h1 class="mb-1 text-white">{{ __('user-dash.Welcome') }} {{$user->name}},</h1>
                             <p class="card-text m-auto w-75">
                                 {{ \App\Models\Setting::value('welcome_message') }}
@@ -42,7 +36,7 @@
                     </div>
                     <div class="card-body statistics-body">
                         <div class="row">
-                            <div class="col-xl-4 col-sm-6 col-12 mb-2 mb-sm-0">
+                            <div class="col-xl-6 col-sm-6 col-12 mb-2 mb-sm-0">
                                 <div class="media">
                                     <div class="avatar bg-light-primary mr-2">
                                         <div class="avatar-content">
@@ -57,7 +51,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4 col-sm-6 col-12">
+                            <div class="col-xl-6 col-sm-6 col-12">
                                 <div class="media">
                                     <div class="avatar bg-light-success mr-2">
                                         <div class="avatar-content">
@@ -102,7 +96,7 @@
                             </div>
                             <div class="text-center">
                                 <p class="card-text mb-50">{{ __('user-dash.Sold Tokens')}}</p>
-                                <span class="font-large-1 font-weight-bold">{{ \App\Models\Stage::activeStage()->sells()->where('status','confirmed')->sum('amount') }}</span>
+                                <span class="font-large-1 font-weight-bold">{{ \App\Models\Stage::activeStage()->totalSold() }}</span>
                             </div>
                             <div class="text-center">
                                 <p class="card-text mb-50">{{ __('user-dash.Total Distribution')}}</p>
@@ -149,8 +143,8 @@
 
 @endsection
 @section('page-scripts')
-    <script src="{{ asset('app-assets/js/scripts/pages/dashboard-ecommerce.js') }}"></script>
-    <script src="{{ asset('app-assets/js/scripts/pages/dashboard-analytics.js') }}"></script>
+{{--    <script src="{{ asset('app-assets/js/scripts/pages/dashboard-ecommerce.js') }}"></script>--}}
+{{--    <script src="{{ asset('app-assets/js/scripts/pages/dashboard-analytics.js') }}"></script>--}}
     <script>
         // RUNNING STAGE CARD
         var $currentStageChart= document.querySelector('#current-stage-chart');
@@ -207,7 +201,7 @@
             stroke: {
                 dashArray: 8
             },
-            series: [{{ round(\App\Models\Stage::activeStage()->sells->sum('amount')*100/ \App\Models\Stage::activeStage()->amount) }}],
+            series: [{{ round(\App\Models\Stage::activeStage()->totalSold()*100/ \App\Models\Stage::activeStage()->amount) }}],
             labels: ['{{__('user-dash.Sold')}}']
         };
         currentStageChart = new ApexCharts($currentStageChart, currentStageChartOptions);

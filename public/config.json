@@ -16,8 +16,8 @@
   },
   "source": {
     "path": "src",
-    "js": "src/js",
-    "sass": "src/scss",
+    "js": "../src/js",
+    "sass": "../src/scss",
     "template": "src/template-builder",
     "documentation": "src/documentation"
   },

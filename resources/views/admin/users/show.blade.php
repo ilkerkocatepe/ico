@@ -240,7 +240,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($user->getExternalWallets as $wallet)
+                                    @foreach($user->externalWallets as $wallet)
                                         <tr>
                                             <td>{{$wallet->id}}</td>
                                             <td>{{$wallet->name}}</td>

@@ -42,7 +42,8 @@
                                         <select class="form-control" name="type" id="type">
                                             <option @if($externalWallet->type=='BTC') selected @endif value="BTC">BTC</option>
                                             <option @if($externalWallet->type=='ETH') selected @endif value="ETH">ETH</option>
-                                            <option @if($externalWallet->type=='OmniUSDT') selected @endif value="OmniUSDT">Omni USDT</option>
+                                            <option @if($externalWallet->type=='USDT_Omni') selected @endif value="USDT_Omni">USDT (Omni)</option>
+                                            <option @if($externalWallet->type=='USDT_ERC20') selected @endif value="USDT_ERC20">USDT (ERC20)</option>
                                             <option @if($externalWallet->type=='LTC') selected @endif value="LTC">LTC</option>
                                             <option @if($externalWallet->type=='XRP') selected @endif value="XRP">XRP</option>
                                         </select>

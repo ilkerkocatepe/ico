@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Sell;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -17,6 +18,12 @@ Route::get('/', function () {
 // Referral Sign up
 Route::get('register/{reference?}', function ($reference) {
     return view('auth.register', compact('reference'));
+});
+Route::get('test', function () {
+   $sell = Sell::findOrFail(1);
+    $sender_user = $sell->user;
+    $receiver_user = $sender_user->parent;
+    dd($receiver_user->balance());
 });
 
 // Resending The Verification Email

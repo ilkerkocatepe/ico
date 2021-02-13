@@ -15,10 +15,12 @@ class CreateBonusEarningsTable extends Migration
     {
         Schema::create('bonus_earnings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('stage_id');
             $table->foreign('stage_id')->references('id')->on('stages')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('sell_id');
+            $table->foreign('sell_id')->references('id')->on('sells')->onDelete('cascade');
             $table->integer('purchase_amount');
             $table->integer('bonus_rate');
             $table->double('bonus_amount');

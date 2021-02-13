@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CryptoPay;
+use App\Models\Sell;
+use App\Models\Stage;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -19,7 +20,7 @@ class SellController extends Controller
      */
     public function index()
     {
-        $sells = CryptoPay::all();
+        $sells = Sell::all();
         return view('admin.sells.index', compact('sells'));
     }
 
@@ -93,9 +94,20 @@ class SellController extends Controller
     {
         $wallet = User::find($user_id)->wallet;
         $balance = $wallet->balance;
+
+        $amount = $this->checkRemain($amount);
         $wallet->update([
             'balance' => $balance + $amount
         ]);
+    }
+
+    public function checkRemain($amount)
+    {
+        if ($amount > Stage::activeRemain())
+        {
+            $amount = Stage::activeRemain();
+        }
+        return $amount;
     }
 
     public function subBalance($user_id, $amount)

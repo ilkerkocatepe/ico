@@ -50,16 +50,16 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.users.edit',$sell->user_id) }}">
+                                        <a href="{{ route('admin.users.show',$sell->user_id) }}">
                                             {{ \App\Models\User::find($sell->user_id)->name }}
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.crypto-gateways.edit',$sell->gateway_id) }}">
-                                            @if(\App\Models\CryptoGateway::find($sell->gateway_id)->icon)
-                                                <i class="{{ \App\Models\CryptoGateway::find($sell->gateway_id)->icon }}"></i>
+                                        <a href="{{ route('admin.crypto-gateways.edit',$sell->sellable->gateway_id) }}">
+                                            @if(isset(\App\Models\CryptoGateway::find($sell->sellable->gateway_id)->icon))
+                                                <i class="{{ \App\Models\CryptoGateway::find($sell->sellable->gateway_id)->icon }}"></i>
                                             @endif
-                                            {{ \App\Models\PaymentMethod::find($sell->payment_id)->name }}
+                                            {{ \App\Models\PaymentMethod::find($sell->method_id)->name }}
                                         </a>
                                     </td>
                                     <td>
@@ -86,8 +86,8 @@
                                         {{ $sell->created_at }}
                                     </td>
                                     <td class="text-center">
-                                        @if(\App\Models\CryptoGateway::find($sell->gateway_id)->payment_id == 1)
-                                            <a href="{{ route('admin.crypto-pays.edit',$sell->id) }}">
+                                        @if(\App\Models\CryptoGateway::find($sell->sellable->gateway_id)->payment_id == 1)
+                                            <a href="{{ route('admin.crypto-pays.edit',$sell->sellable->id) }}">
                                                 <span class="fa fa-eye" title="Show"></span>
                                             </a>
                                         @endif

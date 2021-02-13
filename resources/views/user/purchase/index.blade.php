@@ -126,7 +126,7 @@
                                         <div class="row border-top text-center mx-0">
                                             <div class="col-6 border-right py-1">
                                                 <p class="card-text text-muted mb-0">{{__('Sold Amount')}}</p>
-                                                <h3 class="font-weight-bolder mb-0">{{ $stage->sells()->where('status','confirmed')->sum('amount') }}</h3>
+                                                <h3 class="font-weight-bolder mb-0">{{ $stage->totalSold() }}</h3>
                                             </div>
                                             <div class="col-6 py-1">
                                                 <p class="card-text text-muted mb-0">{{__('Total Amount')}}</p>
@@ -230,7 +230,7 @@
                     </div>
                     <div>
                         @forelse($user->enabledExternalWallets() as $externalwallet)
-                            <div id="external_type_{{$externalwallet->type}}" class="external_wallets row">
+                            <div id="external_type_{{$externalwallet->type}}" class="external_wallets row external_type_{{$externalwallet->type}}">
                                 <div class="col-1">
                                     <div class="custom-control custom-radio mt-3">
                                         <input type="radio" id="external_wallet{{$externalwallet->id}}" name="external_wallet" class="custom-control-input" value="{{$externalwallet->id}}" @if($loop->first) checked @endif required>
@@ -252,10 +252,12 @@
 
                             <div class="alert alert-danger w-100 p-2 text-center external_alert">
                                 {{ __('There is no enabled external wallet! Please add an external wallet.') }}
+                                <a href="{{ route('user.external-wallets.create') }}"><span>{{ __('Create External Wallet') }}</span></a>
                             </div>
                         @empty
                             <div class="alert alert-danger w-100 p-2 text-center">
                                 {{ __('There is no enabled external wallet! Please add an external wallet.') }}
+                                <a href="{{ route('user.external-wallets.create') }}"><span>{{ __('Create External Wallet') }}</span></a>
                             </div>
                         @endforelse
                     </div>
@@ -337,10 +339,10 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <button class="btn btn-primary btn-prev">
+                        <label class="btn btn-primary btn-prev">
                             <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
                             <span class="align-middle d-sm-inline-block d-none">{{__('Previous')}}</span>
-                        </button>
+                        </label>
                         <button class="btn btn-success btn-next" id="submit-purchase" type="submit">
                             <span class="align-middle d-sm-inline-block d-none">{{__('Submit')}}</span>
                         </button>
@@ -351,7 +353,7 @@
         </div>
     </section>
 
-    @if($payments)
+    @if(count($payments))
     <div class="row" id="dark-table">
         <div class="col-12">
             <div class="card">
@@ -394,12 +396,12 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td><span class="font-weight-bold">{{ \App\Models\CryptoGateway::find($payment->gateway_id)->name }}</span></td>
-                                    <td>{{ \App\Models\ExternalWallet::find($payment->external_wallet_id)->name }}</td>
+                                    <td><span class="font-weight-bold">{{ \App\Models\CryptoGateway::find($payment->sellable->gateway_id)->name }}</span></td>
+                                    <td>{{ \App\Models\ExternalWallet::find($payment->sellable->external_wallet_id)->name }}</td>
                                     <td>{{ $payment->amount }}</td>
                                     <td>{{ $payment->price }}</td>
-                                    <td>{{ $payment->payable }} {{ \App\Models\CryptoGateway::find($payment->gateway_id)->symbol }}</td>
-                                    <td>{{ $payment->txhash }}</td>
+                                    <td>{{ $payment->sellable->payable }} {{ \App\Models\CryptoGateway::find($payment->sellable->gateway_id)->symbol }}</td>
+                                    <td>{{ $payment->sellable->txhash }}</td>
                                     <td>
                                         @if($payment->status=="pending")
                                             <span class="badge badge-pill badge-light-warning mr-1">{{ __('Pending') }}</span>
@@ -488,7 +490,7 @@
                     current_val = response.value;
                     $('#method_value').attr('step', 1/(Math.pow(10,response.decimal)))
                     $('.external_wallets').hide();
-                    $('#external_type_'+response.symbol).show();
+                    $('.external_type_'+response.type).show();
                     if($('.external_wallets:visible').length == 0)
                     {
                         $('.external_alert').first().show();

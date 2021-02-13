@@ -149,7 +149,9 @@ $(function () {
   // Vertical Wizard
   // --------------------------------------------------------------------
   if (typeof verticalWizard !== undefined && verticalWizard !== null) {
-    var verticalStepper = new Stepper(verticalWizard);
+    var verticalStepper = new Stepper(verticalWizard, {
+      linear: false
+    });
     $(verticalWizard)
       .find('.btn-next')
       .on('click', function () {

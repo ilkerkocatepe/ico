@@ -15,13 +15,15 @@ class WalletSeeder extends Seeder
      */
     public function run()
     {
-        //adding wallet for admin
-
+        for ($i=1; $i<6; $i++)
+        {
             DB::table('wallets')->insert([
-                'user_id' => 1,
-                'type' => 'FTX',
-                'address' => 'FTX000001',
+                'user_id' => $i,
+                'type' => env('TOKEN_SYMBOL'),
+                'address' => env('TOKEN_SYMBOL').'x0'.Str::random(20),
                 'balance' => 0,
+                'created_at' => now(),
             ]);
+        }
     }
 }

@@ -80,12 +80,6 @@ class User extends Authenticatable implements MustVerifyEmail, BannableContract
         'profile_photo_url',
     ];
 
-/*    public function sendPasswordResetNotification($token)
-    {
-        $url = 'http://ico.test/reset-password/'.$token;
-        $this->notify(new ResetPasswordNotification($url));
-    }*/
-
     public function children()
     {
         return $this->hasMany(self::class, 'referral');
@@ -111,7 +105,7 @@ class User extends Authenticatable implements MustVerifyEmail, BannableContract
         return $this->hasMany('App\Models\Wallet');
     }
 
-    public function getExternalWallets()
+    public function externalWallets()
     {
         return $this->hasMany('App\Models\ExternalWallet');
     }
@@ -183,7 +177,7 @@ class User extends Authenticatable implements MustVerifyEmail, BannableContract
 
     public function payments()
     {
-        return $this->hasMany(CryptoPay::class);
+        return $this->hasMany(Sell::class);
     }
 
     public function bonus_earnings()

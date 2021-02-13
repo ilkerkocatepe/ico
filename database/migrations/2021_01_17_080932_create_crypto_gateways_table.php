@@ -19,15 +19,16 @@ class CreateCryptoGatewaysTable extends Migration
             $table->foreign('payment_id')->references('id')->on('payment_methods')->onDelete('cascade');
             $table->string('name');
             $table->string('symbol');
+            $table->string('type');
             $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->string('icon')->nullable();
             $table->enum('address_req',['0','1'])->default('0');
             $table->integer('confirm_decimal')->default(3);
-            $table->string('val1');
+            $table->string('val1')->comment('address');
             $table->string('val2');
             $table->string('val3');
-            $table->string('val4');
+            $table->string('val4')->comment('encrypted');
             $table->enum('status',['0','1'])->default('1');
             $table->timestamps();
             $table->softDeletes();

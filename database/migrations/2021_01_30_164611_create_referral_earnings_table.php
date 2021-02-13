@@ -15,10 +15,14 @@ class CreateReferralEarningsTable extends Migration
     {
         Schema::create('referral_earnings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('stage_id');
+            $table->foreign('stage_id')->references('id')->on('stages')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->comment('receiver');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('referral_id');
+            $table->unsignedBigInteger('referral_id')->comment('sender');;
             $table->foreign('referral_id')->references('id')->on('users');
+            $table->unsignedBigInteger('sell_id');
+            $table->foreign('sell_id')->references('id')->on('sells')->onDelete('cascade');
             $table->double('amount');
             $table->integer('level');
             $table->timestamps();

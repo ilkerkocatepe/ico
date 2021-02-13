@@ -19,7 +19,7 @@ class CreateExternalWalletsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->enum('type',['BTC','ETH','OmniUSDT','LTC','XRP']);
+            $table->enum('type',['BTC','USDT_Omni','ETH','USDT_ERC20','LTC','XRP']);
             $table->string('address');
             $table->enum('status',['0','1'])->default('1');
             $table->timestamps();

@@ -25,8 +25,10 @@
                                 <h2 class="my-1 text-right font-large-4"><span class="text-primary">{{ auth()->user()->balance() }}</span> {{ $tokenSymbol }}</h2>
                                 <p class="card-text text-muted font-small-2 text-right">
                                     <span>{{ __('You got') }}</span>
-                                    <span class="font-weight-bolder">{{ auth()->user()->bonus_earnings->sum('amount') }}</span>
-                                    <span> {{ __('Bonus') }}</span>
+                                    <span class="font-weight-bolder">{{ auth()->user()->bonus_earnings->sum('bonus_amount') }} {{ env('TOKEN_SYMBOL') }}</span>
+                                    <span> {{ __('bonus') }}</span> and
+                                    <span class="font-weight-bolder">{{ auth()->user()->referral_earnings->sum('amount') }} {{ env('TOKEN_SYMBOL') }}</span>
+                                    <span> {{ __('as referral earnings') }}</span>
                                 </p>
                             </div>
                         </div>
@@ -77,12 +79,12 @@
                             <tbody>
                             @foreach($payments as $payment)
                                 <tr>
-                                    <td><span class="font-weight-bold">{{ \App\Models\CryptoGateway::find($payment->gateway_id)->name }}</span></td>
-                                    <td>{{ \App\Models\ExternalWallet::find($payment->external_wallet_id)->name }}</td>
+                                    <td><span class="font-weight-bold">{{ \App\Models\CryptoGateway::find($payment->sellable->gateway_id)->name }}</span></td>
+                                    <td>{{ \App\Models\ExternalWallet::find($payment->sellable->external_wallet_id)->name }}</td>
                                     <td>{{ $payment->amount }}</td>
                                     <td>{{ $payment->price }}</td>
-                                    <td>{{ $payment->payable }} {{ \App\Models\CryptoGateway::find($payment->gateway_id)->symbol }}</td>
-                                    <td>{{ $payment->txhash }}</td>
+                                    <td>{{ $payment->sellable->payable }} {{ \App\Models\CryptoGateway::find($payment->sellable->gateway_id)->symbol }}</td>
+                                    <td>{{ $payment->sellable->txhash }}</td>
                                     <td>
                                         @if($payment->status=="pending")
                                             <span class="badge badge-pill badge-light-warning mr-1">{{ __('Pending') }}</span>

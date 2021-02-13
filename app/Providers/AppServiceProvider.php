@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \View::share('tokenSymbol',Setting::value('token_symbol'));
+        \View::share('tokenSymbol',env('TOKEN_SYMBOL', 'FTRX'));
     }
 }

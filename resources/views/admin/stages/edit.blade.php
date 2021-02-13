@@ -200,16 +200,16 @@
                                         {{ \App\Models\User::find($sell->user_id)->name }}
                                     </td>
                                     <td>
-                                        {{ \App\Models\PaymentMethod::find($sell->payment_id)->name }}
+                                        {{ \App\Models\PaymentMethod::find($sell->method_id)->name }}
                                     </td>
                                     <td>
                                         {{ $sell->amount }}
                                     </td>
                                     <td>
-                                        {{ $sell->price }}
+                                       $ {{ $sell->price }}
                                     </td>
                                     <td>
-                                        {{ $sell->total }}
+                                       $ {{ $sell->total }}
                                     </td>
                                     <td>
                                         @if($sell->status=="pending")

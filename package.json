@@ -28,6 +28,7 @@
         "@popperjs/core": "^2.6.0",
         "apexcharts": "^3.23.1",
         "bootstrap": "^4.5.3",
+        "gulp": "^4.0.2",
         "pc-bootstrap4-datetimepicker": "^4.17.51",
         "popper.js": "^1.16.1",
         "sweetalert2": "^10.13.0"

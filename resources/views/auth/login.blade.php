@@ -10,11 +10,10 @@
 @section('content')
     <div class="card mb-0">
         <div class="card-body">
-            <a href="javascript:void(0);" class="brand-logo">
-                <img src="{{ asset('assets/images/logo/logo.png') }}" style="height: 100px; width: 100px;">
+            <a href="{{ route('index') }}" class="brand-logo">
+                <img src="{{ asset('storage/assets/front/images/logo.svg') }}" style="height: auto; width: 70%;">
             </a>
 
-            <h2 class="brand-text text-primary text-center">{{ \App\Models\Setting::where('setting', 'title')->first()->value }}</h2>
             <p class="card-text mt-2">Please sign-in to your account and start the adventure</p>
             <form class="auth-login-form" action="{{ route('login') }}" method="POST">
                 @csrf

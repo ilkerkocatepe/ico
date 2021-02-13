@@ -18,9 +18,9 @@ class ExternalWalletSeeder extends Seeder
         //adding wallet for admin
         DB::table('external_wallets')->insert([
             'user_id' => 1,
-            'name' => 'My ETH Wallet',
-            'type' => 'ETH',
-            'description' => 'My First ETH Wallet',
+            'name' => 'My Tether Wallet',
+            'type' => 'USDT_ERC20',
+            'description' => 'ERC20 Tether Wallet',
             'address' => Str::random('15'),
             'status' => '1',
         ]);

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BonusEarnings;
+use App\Models\Sell;
+use App\Models\Stage;
+use App\Notifications\User\BonusEarning;
 use Illuminate\Http\Request;
 
 class BonusEarningsController extends Controller
@@ -81,5 +84,45 @@ class BonusEarningsController extends Controller
     public function destroy(BonusEarnings $bonusEarnings)
     {
         //
+    }
+
+
+    public function addBonus($sell_id)
+    {
+        $sell = Sell::findOrFail($sell_id);
+
+        // BONUS RECORD
+        $bonus_amount = Stage::activeStage()->bonus_rate * $sell->amount / 100;
+
+        //  Firstly, check available token amount
+        if (app(SellController::class)->checkRemain($bonus_amount))
+        {
+            $bonus = BonusEarnings::create([
+                'stage_id' => $sell->stage->id,
+                'user_id' => $sell->user->id,
+                'sell_id' => $sell->id,
+                'purchase_amount' => $sell->amount,
+                'bonus_rate' => Stage::activeStage()->bonus_rate,
+                'bonus_amount' => app(SellController::class)->checkRemain($bonus_amount)
+            ]);
+
+            //  ADD BONUS TO WALLET
+            app(SellController::class)->addBalance($sell->user->id, $bonus_amount);
+
+            // NOTIFICATION
+            $sell->user->notify(new BonusEarning($bonus));
+        }
+    }
+
+    public function subBonus($sell_id)
+    {
+        $sell = Sell::findOrFail($sell_id);
+        $bonus_earning = $sell->bonus_earning;
+
+        //  SUBTRACT BONUS FROM WALLET
+        app(SellController::class)->subBalance($sell->user->id, $bonus_earning->bonus_amount);
+
+        //  DELETE BONUS RECORD
+        $bonus_earning->delete();
     }
 }
