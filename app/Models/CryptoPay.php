@@ -21,16 +21,21 @@ class CryptoPay extends Model
 
     public function stage()
     {
-        $this->belongsTo(Stage::class);
+        return $this->belongsTo(Stage::class);
     }
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function sells()
     {
         return $this->morphOne(Sell::class, 'sellable');
+    }
+
+    public function external_wallet()
+    {
+        return $this->belongsTo(ExternalWallet::class);
     }
 }

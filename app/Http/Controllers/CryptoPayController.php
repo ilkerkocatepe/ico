@@ -179,7 +179,7 @@ class CryptoPayController extends Controller
                     ->log('Payment Request Rejected');
             })->afterResponse();
 
-            $msg = $msg ? '. ' . $msg : null;
+            $msg = $msg ? '. ' . $msg : '.';
             return back()->with('success', __('Payment successfully rejected') . $msg);
         } else {
             return back()->withErrors(__('Payment could not be declined'));

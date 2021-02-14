@@ -60,13 +60,15 @@
                                                 <a href="{{ route('user.external-wallets.edit',$wallet) }}" class="dropdown-item">
                                                     <i data-feather='edit-2'></i> {{ __('Edit') }}
                                                 </a>
-                                                <form id="deleteForm" method="post" action="{{ route('user.external-wallets.destroy',$wallet) }}">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <a href="#" onclick="document.getElementById('deleteForm').submit();" class="dropdown-item text-danger">
-                                                        <i data-feather='trash-2'></i> {{ __('Delete') }}
-                                                    </a>
-                                                </form>
+                                                @if(!count($wallet->crypto_pays))
+                                                    <form id="deleteForm" method="post" action="{{ route('user.external-wallets.destroy',$wallet) }}">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <a href="#" onclick="document.getElementById('deleteForm').submit();" class="dropdown-item text-danger">
+                                                            <i data-feather='trash-2'></i> {{ __('Delete') }}
+                                                        </a>
+                                                    </form>
+                                                @endif
                                                 @if($wallet->status)
                                                     <form id="disableWallet" method="post" action="{{ route('user.external-wallets.disable',$wallet) }}">
                                                         @csrf
