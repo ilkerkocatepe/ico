@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block">
                         <div class="form-group breadcrumb-right">
                             @yield('top_right_button')
                         </div>
