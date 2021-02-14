@@ -9,13 +9,13 @@
 @section('header_title')
     {{__('Edit Crypto Pay')}}: <span class="text-primary">{{ $cryptoPay->id }}</span>
     @if($cryptoPay->sells->status=="canceled")
-        <span class="badge badge-glow badge-warning ml-1 p-1">{{__('Canceled')}}</span>
+        <span class="badge badge-glow badge-secondary ml-1 p-1">{{__('Canceled')}}</span>
     @elseif($cryptoPay->sells->status=="rejected")
         <span class="badge badge-glow badge-danger ml-1 p-1">{{__('Rejected')}}</span>
     @elseif($cryptoPay->sells->status=="confirmed")
         <span class="badge badge-glow badge-success ml-1 p-1">{{__('Confirmed')}}</span>
     @else
-        <span class="badge badge-glow badge-primary ml-1 p-1">{{__('Pending')}}</span>
+        <span class="badge badge-glow badge-warning ml-1 p-1">{{__('Pending')}}</span>
     @endif
 @endsection
 @section('top_right_button')

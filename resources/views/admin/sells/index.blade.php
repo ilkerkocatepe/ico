@@ -73,11 +73,11 @@
                                     </td>
                                     <td>
                                         @if($sell->status=="pending")
-                                            <span class="badge badge-pill badge-light-primary mr-1">{{ __('Pending') }}</span>
+                                            <span class="badge badge-pill badge-light-warning mr-1">{{ __('Pending') }}</span>
                                         @elseif($sell->status=="confirmed")
                                             <span class="badge badge-pill badge-light-success mr-1">{{ __('Confirmed') }}</span>
                                         @elseif($sell->status=="canceled")
-                                            <span class="badge badge-pill badge-light-warning mr-1">{{ __('Canceled') }}</span>
+                                            <span class="badge badge-pill badge-light-secondary mr-1">{{ __('Canceled') }}</span>
                                         @elseif($sell->status=="rejected")
                                             <span class="badge badge-pill badge-light-danger mr-1">{{ __('Rejected') }}</span>
                                         @endif
