@@ -15,10 +15,10 @@
                 <img src="{{ asset('assets/images/logo/logo.png') }}" style="height: 100px; width: 100px;">
             </a>
 
-            <h2 class="brand-text text-primary text-center">{{ \App\Models\Setting::where('setting', 'title')->first()->value }}</h2>
+            <h2 class="brand-text text-primary text-center">{{ \App\Models\Setting::value('title') }}</h2>
 
-            <div class="mb-4 text-sm text-gray-600">
-                {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+            <div class="mb-2 text-gray-600">
+                {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you?') }}
             </div>
 
             @if (session('status') == 'verification-link-sent')
@@ -27,14 +27,15 @@
                 </div>
             @endif
 
-            <div class="mt-4 flex items-center justify-between">
+            <p class="text-warning">{{ __('Check your email firstly. If you didn\'t receive the email, we will gladly send you another.') }}</p>
+            <div class="mt-2 flex items-center justify-between">
                 <form method="POST" action="{{ route('verification.send') }}">
                     @csrf
                     <div>
-                        <button type="submit" class="btn btn-primary btn-block" tabindex="3">{{ __('Resend Verification Email') }}</button>
+                        <button type="submit" class="text-primary" tabindex="3">{{ __('Resend Verification Email') }}</button>
                     </div>
                 </form>
-<br>
+                <br>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="btn btn-primary btn-block" tabindex="4">{{ __('Logout') }}</button>

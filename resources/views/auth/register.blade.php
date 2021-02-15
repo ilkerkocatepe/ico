@@ -17,7 +17,7 @@
 
             <p class="card-text mb-2">Let's sign up!</p>
             @if ($errors->any())
-                <div class="alert alert-danger">
+                <div class="alert alert-danger p-1">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
