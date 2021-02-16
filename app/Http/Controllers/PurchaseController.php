@@ -299,11 +299,11 @@ class PurchaseController extends Controller
 
         try {
             $payment = CryptoPay::create([
-            'gateway_id' => $gateway,
-            'external_wallet_id' => $external_wallet,
-            'payable' => number_format(Stage::activePrice() * $amount/$this->selectedMarketValue($gateway), CryptoGateway::find($gateway)->confirm_decimal, '.', ''),
-            'current_value' => $this->selectedMarketValue($gateway) ?? 0,
-            'txhash' => $validatedData['txhash'],
+                'gateway_id' => $gateway,
+                'external_wallet_id' => $external_wallet,
+                'payable' => number_format(Stage::activePrice() * $amount/$this->selectedMarketValue($gateway), CryptoGateway::find($gateway)->confirm_decimal, '.', ''),
+                'current_value' => $this->selectedMarketValue($gateway) ?? 0,
+                'txhash' => $validatedData['txhash'],
             ]);
 
             Sell::create([
