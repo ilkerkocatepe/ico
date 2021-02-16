@@ -1,6 +1,6 @@
 @php($level+=1)
 @foreach($childs as $child)
-    @if($level<\App\Models\ReferenceLevel::all()->count())
+    @if($level<\App\Models\ReferenceLevel::all()->count()+1)
         <tr>
             <td>
                 {{ $child->name }}
