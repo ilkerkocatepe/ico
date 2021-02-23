@@ -303,7 +303,7 @@ class PurchaseController extends Controller
                 'external_wallet_id' => $external_wallet,
                 'payable' => number_format(Stage::activePrice() * $amount/$this->selectedMarketValue($gateway), CryptoGateway::find($gateway)->confirm_decimal, '.', ''),
                 'current_value' => $this->selectedMarketValue($gateway) ?? 0,
-                'txhash' => $validatedData['txhash'],
+                'txhash' => preg_replace('/\s+/', '', $validatedData['txhash']),
             ]);
 
             Sell::create([
