@@ -49,6 +49,7 @@ class ExternalWalletController extends Controller
     public function store(ExternalWalletRequest $request)
     {
         $validatedData = $request->validated();
+        $validatedData['address'] = preg_replace('/\s+/', '', $validatedData['address']);
 
         if (isset($validatedData['status']))
         {
@@ -110,6 +111,7 @@ class ExternalWalletController extends Controller
     public function update(ExternalWalletRequest $request, ExternalWallet $externalWallet)
     {
         $validatedData = $request->validated();
+        $validatedData['address'] = preg_replace('/\s+/', '', $validatedData['address']);
 
         if (isset($validatedData['status']))
         {
