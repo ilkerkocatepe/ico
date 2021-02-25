@@ -12,10 +12,8 @@
     <div class="card mb-0">
         <div class="card-body">
             <a href="javascript:void(0);" class="brand-logo">
-                <img src="{{ asset('assets/front/images/logo.png') }}" style="height: 100px; width: 100px;">
+                <img src="{{ asset('storage/assets/front/images/logo.svg') }}" style="height: auto; width: 70%;">
             </a>
-
-            <h2 class="brand-text text-primary text-center">{{ \App\Models\Setting::value('title') }}</h2>
 
             <div class="mb-2 text-gray-600">
                 {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you?') }}
