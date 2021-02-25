@@ -15,7 +15,7 @@
                 <img src="{{ asset('storage/assets/front/images/logo.svg') }}" style="height: auto; width: 70%;">
             </a>
 
-            <p class="card-text mb-2">Let's sign up!</p>
+            <p class="card-text mb-2">{{ __('Let\'s register and start the adventure!') }}</p>
             @if ($errors->any())
                 <div class="alert alert-danger p-1">
                     <ul>
@@ -45,7 +45,7 @@
                 @endif
 
                 <div class="form-group">
-                    <label for="name" class="form-label">{{ __('Name') }}</label>
+                    <label for="name" class="form-label">{{ __('Name') }} {{ __('Surname') }}</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="john doe" aria-describedby="name" tabindex="1" value="{{ old('name') }}" autofocus required/>
                 </div>
                 <div class="form-group">
