@@ -12,7 +12,7 @@
     <div class="card mb-0">
         <div class="card-body">
             <a href="javascript:void(0);" class="brand-logo">
-                <img src="{{ asset('assets/images/logo/logo.png') }}" style="height: 100px; width: 100px;">
+                <img src="{{ asset('assets/front/images/logo.png') }}" style="height: 100px; width: 100px;">
             </a>
 
             <h2 class="brand-text text-primary text-center">{{ \App\Models\Setting::value('title') }}</h2>
