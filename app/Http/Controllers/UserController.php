@@ -216,4 +216,26 @@ class UserController extends Controller
         $user->theme = 'dark';
         $user->save();
     }
+
+    public function assign($user, $role)
+    {
+        User::findOrFail($user)->assignRole($role);
+        return back()->with(['success' => __('Role successfully assigned.')]);
+    }
+
+    public function unassign($user, $role)
+    {
+        User::findOrFail($user)->removeRole($role);
+        return back()->with(['success' => __('Role successfully unassigned.')]);
+    }
+
+    public function ban($user)
+    {
+
+    }
+
+    public function unban($user)
+    {
+
+    }
 }

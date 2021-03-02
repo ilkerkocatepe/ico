@@ -260,24 +260,24 @@
                                 <a class="btn btn-info text-center btn-block" href=""><i class="fas fa-user-check"></i>  {{ __('Verify User') }}</a>
                             @endif
                             @if(!in_array('Admin',$user->getRoleNames()->all()))
-                                <a class="btn btn-secondary text-center btn-block" href=""><i class="fas fa-user-check"></i>  {{ __('Assign Admin') }}</a>
+                                <a class="btn btn-secondary text-center btn-block" href="{{ route('admin.assign', [$user, 'Admin']) }}"><i class="fas fa-user-check"></i>  {{ __('Assign Admin') }}</a>
                                 @if(!in_array('Editor',$user->getRoleNames()->all()))
-                                    <a class="btn btn-secondary text-center btn-block" href=""><i class="fas fa-user-check"></i>  {{ __('Assign Editor') }}</a>
+                                    <a class="btn btn-secondary text-center btn-block" href="{{ route('admin.assign',[$user, 'Editor']) }}"><i class="fas fa-user-check"></i>  {{ __('Assign Editor') }}</a>
                                 @else
-                                    <a class="btn btn-light text-center btn-block" href=""><i class="fas fa-user-times"></i>  {{ __('Unassign Editor') }}</a>
+                                    <a class="btn btn-light text-center btn-block" href="{{ route('admin.unassign',[$user, 'Editor']) }}"><i class="fas fa-user-times"></i>  {{ __('Unassign Editor') }}</a>
                                 @endif
                                 @if(!in_array('Accountant',$user->getRoleNames()->all()))
-                                    <a class="btn btn-secondary text-center btn-block" href=""><i class="fas fa-user-check"></i>  {{ __('Assign Accountant') }}</a>
+                                    <a class="btn btn-secondary text-center btn-block" href="{{ route('admin.assign',[$user, 'Accountant']) }}"><i class="fas fa-user-check"></i>  {{ __('Assign Accountant') }}</a>
                                 @else
-                                    <a class="btn btn-light text-center btn-block" href=""><i class="fas fa-user-times"></i>  {{ __('Unassign Accountant') }}</a>
+                                    <a class="btn btn-light text-center btn-block" href="{{ route('admin.unassign',[$user, 'Accountant']) }}"><i class="fas fa-user-times"></i>  {{ __('Unassign Accountant') }}</a>
                                 @endif
                             @else
-                                <a class="btn btn-light text-center btn-block" href=""><i class="fas fa-user-times"></i>  {{ __('Unassign Admin') }}</a>
+                                <a class="btn btn-light text-center btn-block" href="{{ route('admin.unassign', [$user, 'Admin']) }}"><i class="fas fa-user-times"></i>  {{ __('Unassign Admin') }}</a>
                             @endif
                             @if($user->isBanned())
-                                <a class="btn btn-info text-center btn-block" href=""><i class="fas fa-user"></i>  {{ __('Unban User') }}</a>
+                                <a class="btn btn-info text-center btn-block" href="{{ route('admin.unban', $user) }}"><i class="fas fa-user"></i>  {{ __('Unban User') }}</a>
                             @else
-                                <a class="btn btn-danger text-center btn-block" href=""><i class="fas fa-user-slash"></i>  {{ __('Ban User') }}</a>
+                                <a class="btn btn-danger text-center btn-block" href="{{ route('admin.ban', $user) }}"><i class="fas fa-user-slash"></i>  {{ __('Ban User') }}</a>
                             @endif
                         @endif
                     </div>

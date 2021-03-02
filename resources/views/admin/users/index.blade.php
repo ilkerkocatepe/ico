@@ -76,26 +76,11 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-96px, 30px, 0px); top: 0px; left: 0px; will-change: transform;">
                                                 <a href="{{ route('admin.users.show',$user->id) }}" class="dropdown-item">
-                                                    <i class="fas fa-user-circle"></i> Show
+                                                    <i class="fas fa-user-circle"></i> {{ __('Show') }}
                                                 </a>
                                                 <a href="{{ route('admin.users.edit',$user->id) }}" class="dropdown-item">
-                                                    <i class="fas fa-user-edit"></i> Edit
+                                                    <i class="fas fa-user-edit"></i> {{ __('Edit') }}
                                                 </a>
-                                                {{-- TODO:USER BAN VERIFY UNBAN --}}
-                                                @if(!$user->email_verified_at)
-                                                    <a href="javascript:;" class="dropdown-item">
-                                                        <i class="fas fa-user-check"></i> Verify
-                                                    </a>
-                                                @endif
-                                                @if(!$user->isBanned())
-                                                    <a href="javascript:;" class="dropdown-item">
-                                                        <i class="fas fa-user-slash"></i> Ban
-                                                    </a>
-                                                @else
-                                                    <a href="javascript:;" class="dropdown-item">
-                                                        <i class="fas fa-child"></i> Unban
-                                                    </a>
-                                                @endif
                                             </div>
                                         </div>
                                     </td>

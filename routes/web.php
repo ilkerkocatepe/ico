@@ -97,6 +97,10 @@ Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant']
 
     //  USER BLOCK
     Route::resource('users',\App\Http\Controllers\UserController::class);
+    Route::get('assign/{user}/{role}',[\App\Http\Controllers\UserController::class,'assign'])->name('assign');
+    Route::get('unassign/{user}/{role}',[\App\Http\Controllers\UserController::class,'unassign'])->name('unassign');
+    Route::get('ban/{user}',[\App\Http\Controllers\UserController::class,'ban'])->name('ban');
+    Route::get('unban/{user}',[\App\Http\Controllers\UserController::class,'unban'])->name('unban');
 
     //  MISCELLANEOUS
     Route::resource('announcements',\App\Http\Controllers\AnnouncementController::class);
