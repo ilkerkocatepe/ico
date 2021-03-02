@@ -82,7 +82,7 @@ class UserController extends Controller
     {
         $request->validate([
             'profile_photo' => ['nullable','image','mimes:jpg,jpeg,png','max:1024'],
-            'name' => ['required','string'],
+            'name' => ['required','string','min:3'],
             'telegram' => ['nullable','string'],
             'mobile' => ['nullable','numeric'],
             'country' => ['nullable','string'],
