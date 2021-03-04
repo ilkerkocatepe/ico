@@ -27,8 +27,8 @@ class CryptoPayController extends Controller
      */
     public function index()
     {
-        $sells = Sell::all();
-        return view('admin.crypto-pays.index', compact('sells'));
+        $crypto_pays = CryptoPay::all();
+        return view('admin.crypto-pays.index', compact('crypto_pays'));
     }
 
     /**

@@ -8,11 +8,11 @@
 @endsection
 @section('header_title')
     {{__('Edit Crypto Pay')}}: <span class="text-primary">{{ $cryptoPay->id }}</span>
-    @if($cryptoPay->sells->status=="canceled")
+    @if($cryptoPay->sell->status=="canceled")
         <span class="badge badge-glow badge-secondary ml-1 p-1">{{__('Canceled')}}</span>
-    @elseif($cryptoPay->sells->status=="rejected")
+    @elseif($cryptoPay->sell->status=="rejected")
         <span class="badge badge-glow badge-danger ml-1 p-1">{{__('Rejected')}}</span>
-    @elseif($cryptoPay->sells->status=="confirmed")
+    @elseif($cryptoPay->sell->status=="confirmed")
         <span class="badge badge-glow badge-success ml-1 p-1">{{__('Confirmed')}}</span>
     @else
         <span class="badge badge-glow badge-warning ml-1 p-1">{{__('Pending')}}</span>
@@ -34,13 +34,13 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 col-12">
-                                    <i class="fa fa-box fa-2x mr-1 mt-1 text-info"></i> <a class="badge badge-pill badge-glow badge-info font-medium-3 mb-2 p-1" href="{{ route('admin.stages.edit',$cryptoPay->sells->stage_id) }}">{{ \App\Models\Stage::find($cryptoPay->sells->stage_id)->name }}</a>
+                                    <i class="fa fa-box fa-2x mr-1 mt-1 text-info"></i> <a class="badge badge-pill badge-glow badge-info font-medium-3 mb-2 p-1" href="{{ route('admin.stages.edit',$cryptoPay->sell->stage_id) }}">{{ \App\Models\Stage::find($cryptoPay->sell->stage_id)->name }}</a>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <i class="fa fa-check-circle fa-2x mr-1 mt-1 text-info"></i> <a class="badge badge-pill badge-glow badge-light-info font-medium-3 mb-2 p-1" href="{{ route('admin.crypto-gateways.edit',$cryptoPay->gateway_id) }}">{{ \App\Models\CryptoGateway::find($cryptoPay->gateway_id)->name }}</a>
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <i class="fa fa-user fa-2x mr-1 mt-1 text-primary"></i> <a class="badge badge-pill badge-glow badge-primary font-medium-3 mb-2 p-1" href="{{ route('admin.users.show',$cryptoPay->sells->user_id) }}">{{ \App\Models\User::find($cryptoPay->sells->user_id)->name }}</a>
+                                    <i class="fa fa-user fa-2x mr-1 mt-1 text-primary"></i> <a class="badge badge-pill badge-glow badge-primary font-medium-3 mb-2 p-1" href="{{ route('admin.users.show',$cryptoPay->sell->user_id) }}">{{ \App\Models\User::find($cryptoPay->sell->user_id)->name }}</a>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <i class="fas fa-wallet fa-2x mr-1 mt-1 text-primary"></i> <a class="badge badge-pill badge-glow badge-light-primary font-medium-3 mb-2 p-1" href="{{ route('admin.external-wallets.edit',$cryptoPay->external_wallet_id) }}">{{ \App\Models\ExternalWallet::find($cryptoPay->external_wallet_id)->name }}</a>
@@ -59,7 +59,7 @@
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label for="amount">{{ __('Amount') }}*</label>
-                                        <input type="number" id=amount" class="form-control" name="amount" placeholder="{{ __('Amount') }}"  value="{{$cryptoPay->sells->amount}}" required/>
+                                        <input type="number" id=amount" class="form-control" name="amount" placeholder="{{ __('Amount') }}"  value="{{$cryptoPay->sell->amount}}" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-12">
@@ -68,7 +68,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">$</span>
                                         </div>
-                                        <input type="number" step="0.0001" class="form-control" id="price" name="price" placeholder="{{ __('Price') }}"  value="{{$cryptoPay->sells->price}}" required/>
+                                        <input type="number" step="0.0001" class="form-control" id="price" name="price" placeholder="{{ __('Price') }}"  value="{{$cryptoPay->sell->price}}" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-12">
@@ -77,7 +77,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">$</span>
                                         </div>
-                                        <input type="number" step="0.0001" class="form-control" id="total" name="total" placeholder="{{ __('Total') }}" value="{{$cryptoPay->sells->total}}" readonly/>
+                                        <input type="number" step="0.0001" class="form-control" id="total" name="total" placeholder="{{ __('Total') }}" value="{{$cryptoPay->sell->total}}" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
@@ -114,13 +114,13 @@
                                 <div class="col-md-12 col-12">
                                     <div class="form-group">
                                         <label for="user_note">{{ __('User Note') }}</label>
-                                        <textarea id="user_note" class="form-control" name="user_note" placeholder="{{ __('User Note') }}" >{{$cryptoPay->sells->user_note}}</textarea>
+                                        <textarea id="user_note" class="form-control" name="user_note" placeholder="{{ __('User Note') }}" >{{$cryptoPay->sell->user_note}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-12">
                                     <div class="form-group">
                                         <label for="admin_note">{{ __('Admin Note') }}</label>
-                                        <textarea id="admin_note" class="form-control" name="admin_note" placeholder="{{ __('Admin Note') }}" >{{$cryptoPay->sells->admin_note}}</textarea>
+                                        <textarea id="admin_note" class="form-control" name="admin_note" placeholder="{{ __('Admin Note') }}" >{{$cryptoPay->sell->admin_note}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                 <i class="fa fa-redo"></i>
                                 {{__('Reset')}}
                             </button>
-                            @if($cryptoPay->sells->status=="pending")
+                            @if($cryptoPay->sell->status=="pending")
                                 <form id="rejectForm" action="{{ route('admin.crypto-pays.reject') }}" method="post">
                                     @csrf
                                     <input type="hidden" id="rejectId" name="rejectId" value="{{ $cryptoPay->id }}">
@@ -158,7 +158,7 @@
                                         {{__('Confirm')}}
                                     </button>
                                 </form>
-                            @elseif($cryptoPay->sells->status=="rejected")
+                            @elseif($cryptoPay->sell->status=="rejected")
                                 <form id="confirmForm" action="{{ route('admin.crypto-pays.confirm') }}" method="post">
                                     @csrf
                                     <input type="hidden" id="confirmId" name="confirmId" value="{{ $cryptoPay->id }}">
@@ -168,7 +168,7 @@
                                         {{__('Confirm')}}
                                     </button>
                                 </form>
-                            @elseif($cryptoPay->sells->status=="confirmed")
+                            @elseif($cryptoPay->sell->status=="confirmed")
                                 <form id="rejectForm" action="{{ route('admin.crypto-pays.reject') }}" method="post">
                                     @csrf
                                     <input type="hidden" id="rejectId" name="rejectId" value="{{ $cryptoPay->id }}">
@@ -178,7 +178,7 @@
                                         {{__('Reject')}}
                                     </button>
                                 </form>
-                            @elseif($cryptoPay->sells->status=="canceled")
+                            @elseif($cryptoPay->sell->status=="canceled")
                             @endif
                         </div>
                     </div>

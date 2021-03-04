@@ -12,7 +12,7 @@
     <a class="btn btn-outline-primary" href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i> {{ __('Dashboard') }}</a>
 @endsection
 @section('content')
-    <section id="sells">
+    <section id="crypto_pays">
         <div class="row" id="table-hover-animation">
             <div class="col-12">
                 <div class="card">
@@ -23,7 +23,7 @@
 
                     </div>
                     <div class="table-responsive">
-                        <table id="sellsTable" class="invoice-list-table table table-hover table-hover-animation" data-page-length='10'>
+                        <table id="crypto_paysTable" class="invoice-list-table table table-hover table-hover-animation" data-page-length='10'>
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -39,55 +39,55 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($sells as $sell)
+                            @foreach($crypto_pays as $pay)
                                 <tr>
                                     <td>
-                                        {{ $sell->id }}
+                                        {{ $pay->id }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.stages.edit',$sell->stage_id) }}">
-                                            {{ \App\Models\Stage::find($sell->stage_id)->name }}
+                                        <a href="{{ route('admin.stages.edit',$pay->sell->stage_id) }}">
+                                            {{ \App\Models\Stage::find($pay->sell->stage_id)->name }}
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.users.edit',$sell->user_id) }}">
-                                            {{ \App\Models\User::find($sell->user_id)->name }}
+                                        <a href="{{ route('admin.users.edit',$pay->sell->user_id) }}">
+                                            {{ \App\Models\User::find($pay->sell->user_id)->name }}
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.crypto-gateways.edit',$sell->sellable->gateway_id) }}">
-                                            @if(\App\Models\CryptoGateway::find($sell->sellable->gateway_id)->icon)
-                                                <i class="{{ \App\Models\CryptoGateway::find($sell->sellable->gateway_id)->icon }}"></i>
+                                        <a href="{{ route('admin.crypto-gateways.edit',$pay->gateway_id) }}">
+                                            @if(\App\Models\CryptoGateway::find($pay->gateway_id)->icon)
+                                                <i class="{{ \App\Models\CryptoGateway::find($pay->gateway_id)->icon }}"></i>
                                             @endif
-                                            {{ \App\Models\CryptoGateway::find($sell->sellable->gateway_id)->name }}
+                                            {{ \App\Models\CryptoGateway::find($pay->gateway_id)->name }}
                                         </a>
                                     </td>
                                     <td>
-                                        {{ $sell->amount }}
+                                        {{ $pay->sell->amount }}
                                     </td>
                                     <td>
-                                        {{ $sell->price }}
+                                        {{ $pay->sell->price }}
                                     </td>
                                     <td>
-                                        {{ $sell->total }}
+                                        {{ $pay->sell->total }}
                                     </td>
                                     <td>
-                                        @if($sell->status=="pending")
+                                        @if($pay->sell->status=="pending")
                                             <span class="badge badge-pill badge-light-warning mr-1">{{ __('Pending') }}</span>
-                                        @elseif($sell->status=="confirmed")
+                                        @elseif($pay->sell->status=="confirmed")
                                             <span class="badge badge-pill badge-light-success mr-1">{{ __('Confirmed') }}</span>
-                                        @elseif($sell->status=="canceled")
+                                        @elseif($pay->sell->status=="canceled")
                                             <span class="badge badge-pill badge-light-secondary mr-1">{{ __('Canceled') }}</span>
-                                        @elseif($sell->status=="rejected")
+                                        @elseif($pay->sell->status=="rejected")
                                             <span class="badge badge-pill badge-light-danger mr-1">{{ __('Rejected') }}</span>
                                         @endif
                                     </td>
                                     <td>
-                                        {{ $sell->created_at }}
+                                        {{ $pay->sell->created_at }}
                                     </td>
                                     <td class="text-center">
-                                        @if(\App\Models\CryptoGateway::find($sell->sellable->gateway_id)->payment_id == 1)
-                                            <a href="{{ route('admin.crypto-pays.edit',$sell->sellable->id) }}">
+                                        @if(\App\Models\CryptoGateway::find($pay->gateway_id)->payment_id == 1)
+                                            <a href="{{ route('admin.crypto-pays.edit',$pay->id) }}">
                                                 <span class="fa fa-eye" title="Show"></span>
                                             </a>
                                         @endif
@@ -105,7 +105,7 @@
 @section('page-scripts')
     <script>
         $(document).ready(function() {
-            $('#sellsTable').DataTable({
+            $('#crypto_paysTable').DataTable({
                 order: [[8, 'desc']],
                 dom:
                     '<"row d-flex justify-content-between align-items-center m-1"' +

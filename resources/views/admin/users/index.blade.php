@@ -28,7 +28,6 @@
                                 <th>#</th>
                                 <th>{{__('User')}}</th>
                                 <th>{{__('Email')}}</th>
-                                <th>{{__('Balance')}}</th>
                                 <th>{{__('Role')}}</th>
                                 <th>{{__('Status')}}</th>
                                 <th>{{__('Actions')}}</th>
@@ -58,7 +57,6 @@
 
                                     </td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->wallet->balance }}</td>
                                     <td>{{ $user->getRoleNames()->first() }}</td>
                                     <td>
                                         @if($user->status()=='Active')

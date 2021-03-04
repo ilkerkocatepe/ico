@@ -29,7 +29,7 @@ class CryptoPay extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function sells()
+    public function sell()
     {
         return $this->morphOne(Sell::class, 'sellable');
     }
