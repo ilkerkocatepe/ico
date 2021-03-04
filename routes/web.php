@@ -88,15 +88,20 @@ Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant']
     Route::resource('sells',\App\Http\Controllers\SellController::class);
 
     Route::resource('crypto-gateways',\App\Http\Controllers\CryptoGatewayController::class);
+    Route::resource('bank-gateways',\App\Http\Controllers\BankGatewayController::class);
 
     Route::post('crypto-pays/confirm',[\App\Http\Controllers\CryptoPayController::class, 'confirmPay'])->name('crypto-pays.confirm');
     Route::post('crypto-pays/reject',[\App\Http\Controllers\CryptoPayController::class, 'rejectPay'])->name('crypto-pays.reject');
     Route::resource('crypto-pays',\App\Http\Controllers\CryptoPayController::class);
 
+    Route::post('bank-pays/confirm',[\App\Http\Controllers\BankPayController::class,'confirm'])->name('bank-pays.confirm');
+    Route::resource('bank-pays',\App\Http\Controllers\BankPayController::class);
+
     Route::resource('external-wallets',\App\Http\Controllers\ExternalWalletController::class);
 
     //  USER BLOCK
     Route::resource('users',\App\Http\Controllers\UserController::class);
+    Route::put('user/update/{user}',[\App\Http\Controllers\UserController::class,'updateFromAdmin'])->name('user.update');
     Route::get('assign/{user}/{role}',[\App\Http\Controllers\UserController::class,'assign'])->name('assign');
     Route::get('unassign/{user}/{role}',[\App\Http\Controllers\UserController::class,'unassign'])->name('unassign');
     Route::get('ban/{user}',[\App\Http\Controllers\UserController::class,'ban'])->name('ban');
@@ -109,8 +114,4 @@ Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant']
     Route::get('/up', function () {Artisan::call('up');});
     Route::get('/down', function () {Artisan::call('down --secret="maintenance"'); return redirect()->route('check');});
 
-    Route::get('telegram', function () {
-        $test = Notification::send(User::role(['Admin','Accountant'])->get(), new \App\Notifications\Admin\PaymentReceived);
-        dd($test);
-    });
 });

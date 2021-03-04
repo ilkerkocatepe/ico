@@ -11,6 +11,7 @@ return [
     "Sells" => "Sells",
     "Payments" => "Payments",
     "Crypto Pays" => "Crypto Pays",
+    "Bank Pays" => "Bank Pays",
 
     "Users" => "Users",
     "User List" => "User List",

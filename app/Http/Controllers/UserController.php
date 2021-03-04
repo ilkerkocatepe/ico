@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
 use Laravel\Fortify\Contracts\UpdatesUserPasswords;
@@ -107,6 +108,39 @@ class UserController extends Controller
         } catch (\Exception $e)
         {
             return back()->withErrors(['error' => 'Your profile could not be updated']);
+        }
+    }
+
+    public function updateFromAdmin(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => ['required','string','min:3'],
+            'email' => ['required','string','email:dns',Rule::unique('users')->ignore($user->id)],
+            'address' => ['nullable','string'],
+            'city' => ['nullable','string'],
+            'country' => ['nullable','string'],
+            'mobile' => ['nullable','numeric'],
+            'telegram' => ['nullable','string'],
+            'referral' => ['nullable','integer'],
+        ]);
+
+        try {
+            $user = User::findOrFail($user->id);
+            $user->forceFill([
+                'name' => $request->name,
+                'email' => $request->email,
+                'address' => $request->address,
+                'city' => $request->city,
+                'country' => $request->country,
+                'mobile' => $request->mobile,
+                'telegram' => $request->telegram,
+                'referral' => $request->referral
+            ])->save();
+
+            return back()->with(['success' => 'Profile updated successfully!']);
+        } catch (\Exception $e)
+        {
+            return back()->with(['error' => 'Profile could not be updated']);
         }
     }
 
