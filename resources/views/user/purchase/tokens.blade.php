@@ -12,7 +12,7 @@
     <a class="btn btn-outline-primary" href="{{ route('user.dashboard') }}"><i class="fa fa-home"></i> {{ __('Dashboard') }}</a>
 @endsection
 @section('content')
-    @php($payments = auth()->user()->payments()->get())
+    @php($payments = auth()->user()->payments()->orderBy('created_at','desc')->get())
     <section id="my-tokens">
         <div class="row">
             <div class="col-md-6 col-12">
@@ -67,11 +67,9 @@
                             <thead>
                             <tr>
                                 <th>{{ __('Gateway') }}</th>
-                                <th>{{ __('External Wallet') }}</th>
                                 <th>{{ __('Amount') }}</th>
                                 <th>{{ __('Price') }}</th>
-                                <th>{{ __('Payable') }}</th>
-                                <th>TX HASH</th>
+                                <th>{{ __('Total') }}</th>
                                 <th>{{ __('Status') }}</th>
                                 <th>{{ __('Timestamp') }}</th>
                             </tr>
@@ -79,12 +77,10 @@
                             <tbody>
                             @foreach($payments as $payment)
                                 <tr>
-                                    <td><span class="font-weight-bold">{{ \App\Models\CryptoGateway::find($payment->sellable->gateway_id)->name }}</span></td>
-                                    <td>{{ \App\Models\ExternalWallet::find($payment->sellable->external_wallet_id)->name }}</td>
+                                    <td><span class="font-weight-bold">{{ \App\Models\PaymentMethod::findOrFail($payment->method_id)->name }}</span></td>
                                     <td>{{ $payment->amount }}</td>
                                     <td>{{ $payment->price }}</td>
-                                    <td>{{ $payment->sellable->payable }} {{ \App\Models\CryptoGateway::find($payment->sellable->gateway_id)->symbol }}</td>
-                                    <td>{{ $payment->sellable->txhash }}</td>
+                                    <td>{{ $payment->total }}</td>
                                     <td>
                                         @if($payment->status=="pending")
                                             <span class="badge badge-pill badge-light-warning mr-1">{{ __('Pending') }}</span>
