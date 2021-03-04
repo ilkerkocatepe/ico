@@ -60,13 +60,13 @@
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label for="rate">{{ __('Currency Rate') }}*</label>
-                                        <input type="number" min="1" id="rate" class="form-control" name="rate" placeholder="{{ __('Currency Rate (1 for USD)') }}" value="{{old('rate')}}" required>
+                                        <input type="number" min="1" step="0.0001" id="rate" class="form-control" name="rate" placeholder="{{ __('Currency Rate (1 for USD)') }}" value="{{old('rate')}}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label for="deposit_value">{{ __('Deposit Value') }}*</label>
-                                        <input type="number" min="1" id="deposit_value" class="form-control" name="deposit_value" placeholder="{{ __('Deposit Value') }}" value="{{old('deposit_value')}}" required>
+                                        <input type="number" min="1" step="0.01" id="deposit_value" class="form-control" name="deposit_value" placeholder="{{ __('Deposit Value') }}" value="{{old('deposit_value')}}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
