@@ -36,6 +36,11 @@
           "icon": "coins",
           "route": "admin.crypto-pays.index"
       },
+      {
+          "name": "Bank Pays",
+          "icon": "receipt",
+          "route": "admin.bank-pays.index"
+      },
 
     {
           "navheader": "Users",
