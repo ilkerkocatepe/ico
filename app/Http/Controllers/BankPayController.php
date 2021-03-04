@@ -51,7 +51,7 @@ class BankPayController extends Controller
             "user_note" => "nullable|string",
             "admin_note" => "nullable|string",
         ]);
-        $request->token_amount = ($request->deposit_amount / $request->rate) / (Stage::findOrFail($request->stage)->fixed_price);
+        $request->token_amount = ($request->deposit_value) / (Stage::findOrFail($request->stage)->fixed_price);
         return view('admin.bank-pays.preview', compact('request'));
     }
 
@@ -67,7 +67,7 @@ class BankPayController extends Controller
             "user_note" => "nullable|string",
             "admin_note" => "nullable|string",
         ]);
-        $token_amount = ($request->deposit_amount / $request->rate) / (Stage::findOrFail($request->stage_id)->fixed_price);
+        $token_amount = ($request->deposit_value) / (Stage::findOrFail($request->stage_id)->fixed_price);
         try {
             $payment = BankPay::create([
                 "bank_gateway_id" => $request->gateway_id,
