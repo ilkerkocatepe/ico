@@ -8,6 +8,8 @@ use App\Models\Setting;
 use App\Models\Stage;
 use App\Models\User;
 use App\Notifications\User\PaymentConfirmed;
+use App\Notifications\User\PaymentRejected;
+use hisorange\BrowserDetect\Exceptions\Exception;
 use Illuminate\Http\Request;
 
 class BankPayController extends Controller
@@ -130,6 +132,54 @@ class BankPayController extends Controller
         } catch (\Exception $e)
         {
             return back()->with(['error'=>'Bank payment couldn\'t add']);
+        }
+    }
+
+    public function cancel($sell_id)
+    {
+        try {
+            $sell = Sell::findOrFail($sell_id);
+            //  subtract amount from balance
+            app('App\Http\Controllers\SellController')->subBalance($sell->user_id,$sell->amount);
+            $msg = __(" Balance removed from wallet");
+
+            //  subtract bonus earnings
+            if ($sell->bonus_earning)
+            {
+                app(BonusEarningsController::class)->subBonus($sell->id);
+                $msg = __(" Bonus Earnings removed from wallets.");
+            }
+
+            //  subtract referral earnings
+            if (count($sell->referral_earnings))
+            {
+                app(ReferralEarningsController::class)->subReferralEarning($sell->id);
+                $msg = __(" Referral Earnings removed from wallets.");
+            }
+
+            $sell->update([
+                'status' => 'canceled'
+            ]);
+
+            //  SEND NOTIFICATION TO USER
+            dispatch(function () use($sell) {
+                User::find($sell->user_id)->notify(new PaymentRejected('Bank Payment is canceled'));
+                activity('payment-canceled')
+                    ->causedBy(\auth()->user())
+                    ->withProperties([
+                        'status'=>'success',
+                        'interface'=>'web',
+                        'IP' => request()->ip(),
+                        'platform' => \Browser::platformName(),
+                        'browser' => \Browser::browserFamily(),
+                    ])
+                    ->log('Payment Canceled');
+            })->afterResponse();
+
+            return back()->with('success', __('Payment successfully canceled') . $msg);
+        } catch (Exception $e)
+        {
+            return back()->with('error', __('Payment couldn\'t be canceled'));
         }
     }
 

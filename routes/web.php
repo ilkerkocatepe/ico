@@ -95,6 +95,7 @@ Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant']
     Route::resource('crypto-pays',\App\Http\Controllers\CryptoPayController::class);
 
     Route::post('bank-pays/confirm',[\App\Http\Controllers\BankPayController::class,'confirm'])->name('bank-pays.confirm');
+    Route::get('bank-pays/cancel/{sell_id}',[\App\Http\Controllers\BankPayController::class,'cancel'])->name('bank-pays.cancel');
     Route::resource('bank-pays',\App\Http\Controllers\BankPayController::class);
 
     Route::resource('external-wallets',\App\Http\Controllers\ExternalWalletController::class);
