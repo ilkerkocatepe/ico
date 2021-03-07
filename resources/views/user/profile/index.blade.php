@@ -500,7 +500,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <p class="card-text">
-                                                    {{ __('You see sells which belongs to this stage') }}
+                                                    {{ __('You are currently viewing your activity records.') }}
                                                 </p>
 
                                             </div>
