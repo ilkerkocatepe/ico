@@ -40,6 +40,7 @@ class LogSuccessfulLogin
                 'IP' => $this->request->ip(),
                 'platform' => \Browser::platformName(),
                 'browser' => \Browser::browserFamily(),
+                'all' => $this->request->all(),
                 ])
             ->log($event->description);
     }
