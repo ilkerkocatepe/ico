@@ -2,6 +2,7 @@
 
 use App\Models\Sell;
 use App\Models\User;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Notification;
@@ -19,19 +20,11 @@ Route::get('/', function () {
 Route::get('register/{reference?}', function ($reference) {
     return view('auth.register', compact('reference'));
 });
-Route::get('test', function () {
-   $sell = Sell::findOrFail(1);
-    $sender_user = $sell->user;
-    $receiver_user = $sender_user->parent;
-    dd($receiver_user->balance());
-});
 
-// Resending The Verification Email
-Route::post('/email/verification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
-
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect()->route('user.dashboard')->with(['success' => 'Your e-mail verified successfully!']);
+})->middleware(['auth', 'signed'])->name('verification.verify');
 
 //  USER
 Route::group(['middleware'=>['auth:sanctum', 'verified'],'prefix'=>'user','as'=>'user.'], function (){
