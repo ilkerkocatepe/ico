@@ -15,7 +15,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\Models\Activity;
-use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Permission\Traits\HasRoles;
 use Cog\Contracts\Ban\Bannable as BannableContract;
 use Cog\Laravel\Ban\Traits\Bannable;
@@ -30,6 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail, BannableContract
     use SoftDeletes;
     use HasRoles;
     use Bannable;
+    use CausesActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -97,7 +98,7 @@ class User extends Authenticatable implements MustVerifyEmail, BannableContract
 
     public function getLastLogin()
     {
-        return Activity::where('log_name','login')->first()->created_at;
+        return Activity::where('log_name','login')->last()->created_at;
     }
 
     public function getWallets()

@@ -212,7 +212,7 @@
                                             <i data-feather="log-in" class="mr-1"></i>
                                             <span class="card-text user-info-title font-weight-bold mb-0">{{__('Last Login')}}</span>
                                         </div>
-                                        <p class="card-text mb-0">{{ $user->getLastLogin() }}</p>
+                                        <p class="card-text mb-0">{{ $user->actions->where('log_name','login')->last()->created_at }}</p>
                                     </div>
                                     @if($user->isBanned())
                                         <div class="d-flex flex-wrap">
@@ -300,6 +300,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="referrals-tab-justified" data-toggle="tab" href="#referrals" role="tab" aria-controls="referrals" aria-selected="false">{{__('Referrals')}}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="activity-tab-justified" data-toggle="tab" href="#activity" role="tab" aria-controls="activity" aria-selected="false">{{__('Activity')}}</a>
+                            </li>
                         </ul>
 
                         <div class="tab-content pt-1">
@@ -362,6 +365,42 @@
                                     <h3 class="mx-auto my-5 text-center">{{__('There is no one registered with the user\'s reference link!')}}</h3>
                                 @endif
                             </div>
+                            <div class="tab-pane" id="activity" role="tabpanel" aria-labelledby="activity-tab-justified">
+                                <div class="row" id="table-hover-animation">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="table-responsive">
+                                                <table id="activityTable" class="invoice-list-table table table-hover table-hover-animation" data-page-length='10'>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>{{__('Description')}}</th>
+                                                        <th>{{__('Details')}}</th>
+                                                        <th>{{__('Timestamp')}}</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($user->activity as $activity)
+                                                        <tr>
+                                                            <td>{{ $activity->description }}</td>
+                                                            <td>
+                                                                @if($activity->log_name == 'login')
+                                                                    <span class="badge badge-light-success text-capitalize">{{ $activity->getExtraProperty('interface') }}</span>
+                                                                    <span class="badge badge-light-secondary text-capitalize">{{ $activity->getExtraProperty('IP') }}</span>
+                                                                    <span class="badge badge-light-info text-capitalize">{{ $activity->getExtraProperty('browser') }}</span>
+                                                                @else
+                                                                    -
+                                                                @endif
+                                                            </td>
+                                                            <td>{{ $activity->created_at }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -370,5 +409,21 @@
     </section>
 @endsection
 @section('page-scripts')
-    <script src="{{asset('app-assets/js/scripts/pages/app-user-view.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#activityTable').DataTable({
+                order: [[2, 'desc']],
+                dom:
+                    '<"row d-flex justify-content-between align-items-center m-1"' +
+                    '<"col-lg-6 d-flex align-items-center"l<"dt-action-buttons text-xl-right text-lg-left text-lg-right text-left "B>>' +
+                    '<"col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pr-lg-1 p-0"f<"invoice_status ml-sm-2">>' +
+                    '>t' +
+                    '<"d-flex justify-content-between mx-2 row"' +
+                    '<"col-sm-12 col-md-6"i>' +
+                    '<"col-sm-12 col-md-6"p>' +
+                    '>',
+                buttons: [],
+            });
+        } );
+    </script>
 @endsection
