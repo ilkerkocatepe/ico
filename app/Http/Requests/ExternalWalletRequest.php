@@ -28,7 +28,7 @@ class ExternalWalletRequest extends FormRequest
         return [
             'name' => 'required|string|max:100',
             'description' => 'nullable|string|max:255',
-            'type' => 'nullable',
+            'type' => 'required',
             'address' => ['required','string',
                 Rule::unique('external_wallets')
                     ->where(static function ($query) {
