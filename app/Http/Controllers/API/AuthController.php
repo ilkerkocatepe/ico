@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\Setting;
 use App\Models\User;
 use App\Traits\ApiResponser;
+use Cog\Contracts\Ban\Bannable as BannableContract;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Laravel\Fortify\Rules\Password;
 
 class AuthController extends Controller
 {
@@ -20,7 +23,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $input = $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:30'],
+            'name' => ['required', 'string', 'min:3', 'max:60'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
         ]);
@@ -53,13 +56,26 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $attr = $request->validate([
-            'email' => 'required|string|email|',
-            'password' => 'required|string|min:6'
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => [
+                'required',
+                'string',
+                (new Password)->length(8)->requireUppercase()->requireNumeric()->requireSpecialCharacter(),
+                ],
         ]);
+
         $request->interface = "Mobile App";
 
         if (!Auth::attempt($attr)) {
             return $this->error('Credentials not match', 401);
+        }
+
+        if (! $request->user() || ($request->user() instanceof MustVerifyEmail && ! $request->user()->hasVerifiedEmail())) {
+            return $this->error('Your e-mail has not been verified', 401);
+        }
+
+        if ($request->user() && $request->user() instanceof BannableContract && $request->user()->isBanned()) {
+            return $this->error('This account is blocked',403, ['comment' => $request->user()->bans()->first('comment')]);
         }
 
         return $this->success([
@@ -71,8 +87,8 @@ class AuthController extends Controller
     {
         auth()->user()->tokens()->delete();
 
-        return [
+        return $this->success([
             'message' => 'Tokens Revoked'
-        ];
+        ]);
     }
 }
