@@ -181,6 +181,7 @@ return [
         App\Providers\MenuServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Lunaweb\RecaptchaV3\Providers\RecaptchaV3ServiceProvider::class,
+        Cog\Laravel\Ban\Providers\BanServiceProvider::class,
     ],
 
     /*
