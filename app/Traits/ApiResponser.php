@@ -23,10 +23,10 @@ trait ApiResponser
      * @param  int|null  $code
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function success($data, string $message = null, int $code = 200)
+    public function success($data, string $message = null, int $code = 200)
     {
         return response()->json([
-            'status' => 'Success',
+            'status' => 'success',
             'message' => $message,
             'data' => $data
         ], $code);
@@ -43,7 +43,7 @@ trait ApiResponser
     protected function error(string $message = null, int $code, $data = null)
     {
         return response()->json([
-            'status' => 'Error',
+            'status' => 'error',
             'message' => $message,
             'data' => $data
         ], $code);
