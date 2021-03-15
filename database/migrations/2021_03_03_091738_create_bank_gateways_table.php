@@ -21,6 +21,7 @@ class CreateBankGatewaysTable extends Migration
             $table->string('type');
             $table->string('iban');
             $table->string('swift');
+            $table->enum('status',['0','1'])->default('1');
             $table->timestamps();
             $table->softDeletes();
         });
