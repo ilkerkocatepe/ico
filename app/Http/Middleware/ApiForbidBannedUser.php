@@ -8,7 +8,7 @@ use Cog\Contracts\Ban\Bannable as BannableContract;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
-class ForbidBannedUser
+class ApiForbidBannedUser
 {
     use ApiResponser;
     /**

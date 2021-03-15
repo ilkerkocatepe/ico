@@ -51,7 +51,7 @@
         <script src="{{asset('app-assets/js/core/app.js')}}"></script>
 
         @yield('page-js')
-
+        @include('layouts.user.sweetalerts')
         <script>
             $(window).on('load', function() {
                 if (feather) {

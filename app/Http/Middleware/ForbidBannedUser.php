@@ -2,15 +2,14 @@
 
 namespace App\Http\Middleware;
 
-use App\Traits\ApiResponser;
 use Closure;
 use Cog\Contracts\Ban\Bannable as BannableContract;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ForbidBannedUser
 {
-    use ApiResponser;
     /**
      * The Guard implementation.
      *
@@ -37,7 +36,9 @@ class ForbidBannedUser
         $user = $this->auth->user();
 
         if ($user && $user instanceof BannableContract && $user->isBanned()) {
-            return $this->error('This account is blocked',403);
+            $request->session()->invalidate();
+
+            return redirect()->route('login')->with(['error' => 'Your account is blocked']);
         }
 
         return $next($request);
