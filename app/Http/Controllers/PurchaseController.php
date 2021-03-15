@@ -284,6 +284,7 @@ class PurchaseController extends Controller
         return $amount * $rate / 100;
     }
 
+    //for web requests
     public function confirm(Request $request)
     {
         $validatedData = $request->validate([
@@ -326,6 +327,45 @@ class PurchaseController extends Controller
         } catch(\Exception $e)
         {
             return back()->with(['error'=>__('Your payment process has failed')]);
+        }
+    }
+
+    // for api requests
+    public function purchase(array $validatedData)
+    {
+        $amount = $this->amountCheck($validatedData['amount']);
+        $external_wallet = $validatedData['external_wallet'];
+        $gateway = $validatedData['gateway'];
+
+        try {
+            $payment = CryptoPay::create([
+                'gateway_id' => $gateway,
+                'external_wallet_id' => $external_wallet,
+                'payable' => number_format(Stage::activePrice() * $amount/$this->selectedMarketValue($gateway), CryptoGateway::find($gateway)->confirm_decimal, '.', ''),
+                'current_value' => $this->selectedMarketValue($gateway) ?? 0,
+                'txhash' => preg_replace('/\s+/', '', $validatedData['txhash']),
+            ]);
+
+            $sell = Sell::create([
+                'user_id' => \auth()->id(),
+                'stage_id' => Stage::activeStage()->id,
+                'method_id' => '1',
+                'sellable_id' => $payment->getKey(),
+                'sellable_type' => $payment->getMorphClass(),
+                'amount' => $amount,
+                'price' => Stage::activePrice(),
+                'total' => Stage::activePrice() * $amount,
+                'user_note' => $validatedData['user_note'],
+                'status' => 'pending',
+            ]);
+
+            //  CREATE EVENT
+            \App\Events\PaymentReceived::dispatch($payment);
+
+            return $sell;
+        } catch(\Exception $e)
+        {
+            return 0;
         }
     }
 
