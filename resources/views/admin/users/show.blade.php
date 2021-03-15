@@ -207,15 +207,15 @@
                                         </div>
                                         <p class="card-text mb-0">{{ $user->created_at }}</p>
                                     </div>
-                                    <div class="d-flex flex-wrap">
+                                    <div class="d-flex flex-wrap my-50">
                                         <div class="user-info-title">
                                             <i data-feather="log-in" class="mr-1"></i>
                                             <span class="card-text user-info-title font-weight-bold mb-0">{{__('Last Login')}}</span>
                                         </div>
-                                        <p class="card-text mb-0">{{ $user->actions->where('log_name','login')->last()->created_at }}</p>
+                                        <p class="card-text mb-0">{{ $user->actions->where('log_name','login')->last()->created_at ?? '' }}</p>
                                     </div>
                                     @if($user->isBanned())
-                                        <div class="d-flex flex-wrap">
+                                        <div class="d-flex flex-wrap my-50">
                                             <div class="user-info-title">
                                                 <i data-feather="slash" class="mr-1"></i>
                                                 <span class="card-text user-info-title font-weight-bold mb-0">{{__('Banned At')}}</span>
@@ -224,13 +224,13 @@
                                         </div>
                                     @endif
                                     @if($user->isBanned())
-                                        <div class="d-flex flex-wrap">
+                                        <div class="d-flex flex-wrap my-50">
                                             <div class="user-info-title">
                                                 <i data-feather="slash" class="mr-1"></i>
                                                 <span class="card-text user-info-title font-weight-bold mb-0">{{__('Ban Expires')}}</span>
                                             </div>
                                             <p class="card-text mb-0">
-                                                @if($ban->isPermanent())
+                                                @if($user->ban()->isPermanent())
                                                     {{ __('Permanent') }}
                                                 @else
                                                     {{ $user->bans()->lastest()->first()->expired_at }}
