@@ -142,7 +142,7 @@
                             @if($cryptoPay->sell->status=="pending")
                                 <form id="rejectForm" action="{{ route('admin.crypto-pays.reject') }}" method="post">
                                     @csrf
-                                    <input type="hidden" id="rejectId" name="rejectId" value="{{ $cryptoPay->id }}">
+                                    <input type="hidden" id="rejectId" name="rejectId" value="{{ $cryptoPay->sell->id }}">
                                     <input type="hidden" id="rejectNote" name="rejectNote">
                                     <button id="rejectPay" class="btn btn-danger btn-block mb-75" >
                                         <i class="fa fa-times"></i>
@@ -151,7 +151,7 @@
                                 </form>
                                 <form id="confirmForm" action="{{ route('admin.crypto-pays.confirm') }}" method="post">
                                     @csrf
-                                    <input type="hidden" id="confirmId" name="confirmId" value="{{ $cryptoPay->id }}">
+                                    <input type="hidden" id="confirmId" name="confirmId" value="{{ $cryptoPay->sell->id }}">
                                     <input type="hidden" id="confirmNote" name="confirmNote">
                                     <button id="confirmPay" class="btn btn-success btn-block mb-75" >
                                         <i class="fa fa-check"></i>
@@ -161,7 +161,7 @@
                             @elseif($cryptoPay->sell->status=="rejected")
                                 <form id="confirmForm" action="{{ route('admin.crypto-pays.confirm') }}" method="post">
                                     @csrf
-                                    <input type="hidden" id="confirmId" name="confirmId" value="{{ $cryptoPay->id }}">
+                                    <input type="hidden" id="confirmId" name="confirmId" value="{{ $cryptoPay->sell->id }}">
                                     <input type="hidden" id="confirmNote" name="confirmNote">
                                     <button id="confirmPay" class="btn btn-success btn-block mb-75" >
                                         <i class="fa fa-check"></i>
@@ -171,7 +171,7 @@
                             @elseif($cryptoPay->sell->status=="confirmed")
                                 <form id="rejectForm" action="{{ route('admin.crypto-pays.reject') }}" method="post">
                                     @csrf
-                                    <input type="hidden" id="rejectId" name="rejectId" value="{{ $cryptoPay->id }}">
+                                    <input type="hidden" id="rejectId" name="rejectId" value="{{ $cryptoPay->sell->id }}">
                                     <input type="hidden" id="rejectNote" name="rejectNote">
                                     <button id="rejectPay" class="btn btn-danger btn-block mb-75" >
                                         <i class="fa fa-times"></i>
