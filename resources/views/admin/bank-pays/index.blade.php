@@ -83,12 +83,14 @@
                                         {{ $bank_pay->sell->created_at }}
                                     </td>
                                     <td class="text-center">
-                                            <a href="{{ route('admin.bank-pays.show', $bank_pay->id) }}">
-                                                <span class="fa fa-eye fa-2x" title="Show"></span>
-                                            </a>
+                                        <a href="{{ route('admin.bank-pays.show', $bank_pay->id) }}">
+                                            <span class="fa fa-eye fa-2x" title="Show"></span>
+                                        </a>
+                                        @if($bank_pay->sell->status!="canceled")
                                             <a href="{{ route('admin.bank-pays.cancel', $bank_pay->sell->id) }}">
                                                 <span class="fa fa-times fa-2x" title="Cancel"></span>
                                             </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
