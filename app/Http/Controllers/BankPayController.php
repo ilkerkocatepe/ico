@@ -176,7 +176,7 @@ class BankPayController extends Controller
                     ->log('Payment Canceled');
             })->afterResponse();
 
-            return back()->with('success', __('Payment successfully canceled') . $msg);
+            return back()->with('success', __('Payment successfully canceled.') . $msg);
         } catch (Exception $e)
         {
             return back()->with('error', __('Payment couldn\'t be canceled'));
