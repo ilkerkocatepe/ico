@@ -96,7 +96,6 @@ class ReferralEarningsController extends Controller
         {
             //  SET REFERRAL USER
             $receiver_user = $sender_user->parent;
-
             if ($receiver_user->balance() >= $level->min_balance)
             {
                 //  AMOUNT CALCULATE
@@ -138,10 +137,10 @@ class ReferralEarningsController extends Controller
     public function calculate(ReferenceLevel $level, $amount)
     {
         $earning = $amount * $level->rate / 100;
-
-        if ($earning > $level->max_earnings)
-        {
-            $earning = $level->max_earnings;
+        if(isset($level->max_earnings)) {
+            if ($earning > $level->max_earnings) {
+                $earning = $level->max_earnings;
+            }
         }
         return $earning;
     }
