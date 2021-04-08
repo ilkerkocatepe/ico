@@ -191,4 +191,9 @@ class User extends Authenticatable implements MustVerifyEmail, BannableContract
         return $this->hasMany(ReferralEarnings::class);
     }
 
+    public function referral_earning_amount($referral_id)
+    {
+        return $this->referral_earnings->where('referral_id', $referral_id)->sum('amount');
+    }
+
 }
