@@ -384,7 +384,7 @@
                                             <td>{{$earning->referral->name}}</td>
                                             <td>{{$earning->amount}}</td>
                                             <td>{{$earning->level}}</td>
-                                            <td>{{$earning->created_at->diffForHuman()}}</td>
+                                            <td>{{$earning->created_at->diffForHumans()}}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
