@@ -301,6 +301,9 @@
                                 <a class="nav-link" id="referrals-tab-justified" data-toggle="tab" href="#referrals" role="tab" aria-controls="referrals" aria-selected="false">{{__('Referrals')}}</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" id="referral-earnings-tab-justified" data-toggle="tab" href="#referral-earnings" role="tab" aria-controls="referral-earnings" aria-selected="false">{{__('R. Earnings')}}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" id="activity-tab-justified" data-toggle="tab" href="#activity" role="tab" aria-controls="activity" aria-selected="false">{{__('Activity')}}</a>
                             </li>
                         </ul>
@@ -364,6 +367,28 @@
                                 @else
                                     <h3 class="mx-auto my-5 text-center">{{__('There is no one registered with the user\'s reference link!')}}</h3>
                                 @endif
+                            </div>
+                            <div class="tab-pane" id="referral-earnings" role="tabpanel" aria-labelledby="referral-earnings-tab-justified">
+                                <table class="table table-hover-animation">
+                                    <thead>
+                                    <tr>
+                                        <th>{{ __('Referral') }}</th>
+                                        <th>{{ __('Amount') }}</th>
+                                        <th>{{ __('Level') }}</th>
+                                        <th>{{ __('Timestamp') }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($user->referral_earnings as $earning)
+                                        <tr>
+                                            <td>{{$earning->referral->name}}</td>
+                                            <td>{{$earning->amount}}</td>
+                                            <td>{{$earning->level}}</td>
+                                            <td>{{$earning->created_at->diffForHuman()}}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                             <div class="tab-pane" id="activity" role="tabpanel" aria-labelledby="activity-tab-justified">
                                 <div class="row" id="table-hover-animation">
