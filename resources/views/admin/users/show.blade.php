@@ -301,7 +301,7 @@
                                 <a class="nav-link" id="referrals-tab-justified" data-toggle="tab" href="#referrals" role="tab" aria-controls="referrals" aria-selected="false">{{__('Referrals')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="referral-earnings-tab-justified" data-toggle="tab" href="#referral-earnings" role="tab" aria-controls="referral-earnings" aria-selected="false">{{__('R. Earnings')}}</a>
+                                <a class="nav-link" id="referral-earnings-tab-justified" data-toggle="tab" href="#referral-earnings" role="tab" aria-controls="referral-earnings" aria-selected="false">{{__('Ref. Earnings')}}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="activity-tab-justified" data-toggle="tab" href="#activity" role="tab" aria-controls="activity" aria-selected="false">{{__('Activity')}}</a>

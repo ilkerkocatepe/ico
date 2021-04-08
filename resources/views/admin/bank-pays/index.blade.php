@@ -50,7 +50,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.users.edit',$bank_pay->sell->user_id) }}">
+                                        <a href="{{ route('admin.users.show',$bank_pay->sell->user_id) }}">
                                             {{ \App\Models\User::find($bank_pay->sell->user_id)->name }}
                                         </a>
                                     </td>
