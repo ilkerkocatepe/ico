@@ -91,7 +91,6 @@ class ReferralEarningsController extends Controller
     {
         $sell = Sell::findOrFail($sell_id);
         $sender_user = $sell->user;
-
         foreach (ReferenceLevel::all()->sortBy('level') as $level)
         {
             //  SET REFERRAL USER
@@ -110,7 +109,7 @@ class ReferralEarningsController extends Controller
                     $referral_earning = ReferralEarnings::create([
                         'stage_id' => $sell->stage->id,
                         'user_id' => $receiver_user->id,
-                        'referral_id' => $sender_user->id,
+                        'referral_id' => $sell->user->id,
                         'sell_id' => $sell->id,
                         'amount' => $amount,
                         'level' => $level->level,
