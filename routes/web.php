@@ -24,7 +24,7 @@ Route::get('register/{reference?}', function ($reference) {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     return redirect()->route('user.dashboard')->with(['success' => 'Your e-mail verified successfully!']);
-})->name('verification.verify');
+})->middleware(['auth:sanctum'])->name('verification.verify');
 
 //  USER
 Route::group(['middleware'=>['auth:sanctum', 'verified'],'prefix'=>'user','as'=>'user.'], function (){
