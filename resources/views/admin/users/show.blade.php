@@ -257,7 +257,7 @@
                         @if(!in_array('Super Admin',$user->getRoleNames()->all()))
                             <a class="btn btn-primary text-center btn-block" href="{{route('admin.users.edit',$user)}}"><i class="fas fa-user-edit"></i> {{ __('Edit') }}</a>
                             @if(!$user->email_verified_at)
-                                <a class="btn btn-info text-center btn-block" href=""><i class="fas fa-user-check"></i>  {{ __('Verify User') }}</a>
+                                <a class="btn btn-info text-center btn-block" href="{{ route('admin.verify', $user) }}"><i class="fas fa-user-check"></i>  {{ __('Verify User') }}</a>
                             @endif
                             @if(!in_array('Admin',$user->getRoleNames()->all()))
                                 <a class="btn btn-secondary text-center btn-block" href="{{ route('admin.assign', [$user, 'Admin']) }}"><i class="fas fa-user-check"></i>  {{ __('Assign Admin') }}</a>

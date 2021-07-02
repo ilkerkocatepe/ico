@@ -73,7 +73,7 @@ Route::group(['middleware'=>['auth:sanctum', 'verified'],'prefix'=>'user','as'=>
 
 //  ADMINISTRATOR
 $admin = 'futurx';
-Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant'],'prefix'=>$admin,'as'=>'admin.'], function (){
+Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant'],'prefix' => $admin,'as' => 'admin.'], function (){
     Route::view('dashboard', 'admin.dashboard')->name('dashboard');
 
     Route::resource('stages',\App\Http\Controllers\StageController::class);
@@ -100,6 +100,7 @@ Route::group(['middleware'=>['auth', 'role:Super Admin|Admin|Editor|Accountant']
     Route::get('unassign/{user}/{role}',[\App\Http\Controllers\UserController::class,'unassign'])->name('unassign');
     Route::get('ban/{user}',[\App\Http\Controllers\UserController::class,'ban'])->name('ban');
     Route::get('unban/{user}',[\App\Http\Controllers\UserController::class,'unban'])->name('unban');
+    Route::get('verify/{user}',[\App\Http\Controllers\UserController::class,'verify'])->name('verify');
 
     //  MISCELLANEOUS
     Route::resource('announcements',\App\Http\Controllers\AnnouncementController::class);
