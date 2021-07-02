@@ -273,9 +273,12 @@ class UserController extends Controller
 
     }
 
-    public function verify($user)
+    public function verify($userId)
     {
-        User::findOrFail($user)->update(['email_verified_at' => now()]);
+        $user = User::findOrFail($userId);
+        $user->email_verified_at = now();
+        $user->save();
+
         return back()->with(['success' => __('The user verified successfully.')]);
     }
 }
